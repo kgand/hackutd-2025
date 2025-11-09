@@ -11,6 +11,7 @@
     "scrape:force": "python data_orchestrator.py --force-refresh"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@supabase/supabase-js": "^2.39.0",
     "apify-client": "^2.8.0",
     "axios": "^1.6.5",

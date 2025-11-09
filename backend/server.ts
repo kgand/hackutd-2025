@@ -6,6 +6,7 @@ import { ApifyClient } from 'apify-client';
 import cors from "cors";
 import * as cheerio from "cheerio";
 import dotenv from "dotenv";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from 'url';
@@ -18,6 +19,8 @@ const CACHE_DIR = path.join(__dirname, 'cache');
 
 const TOKEN = process.env.apify_token;
 const ACTOR = process.env.apify_actor;
+
+const genAI = new GoogleGenerativeAI(process.env.gemini_api_key || "");
 
 let supabase: SupabaseClient | null = null;
 
