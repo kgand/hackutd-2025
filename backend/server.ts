@@ -3,10 +3,62 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { createClient } from '@supabase/supabase-js';
 import type { SupabaseClient } from '@supabase/supabase-js';
+import * as fs from "fs";
+import * as path from "path";
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const CACHE_DIR = path.join(__dirname, 'cache');
+
 let supabase: SupabaseClient | null = null;
+
+// Cache management functions
+function ensureCacheDir() {
+  if (!fs.existsSync(CACHE_DIR)) {
+    fs.mkdirSync(CACHE_DIR, { recursive: true });
+    console.log(`Created cache directory: ${CACHE_DIR}`);
+  }
+}
+
+function getCacheFilePath(key: string): string {
+  const sanitizedKey = key.replace(/[^a-z0-9_-]/gi, '_');
+  return path.join(CACHE_DIR, `${sanitizedKey}.json`);
+}
+
+function getCachedData(key: string, ttlMs: number = 3600000): any | null {
+  try {
+    const cacheFile = getCacheFilePath(key);
+    
+    if (!fs.existsSync(cacheFile)) {
+      console.log(`No cache file found for ${key}`);
+      return null;
+    }
+    
+    const stats = fs.statSync(cacheFile);
+    const age = Date.now() - stats.mtimeMs;
+    
+    const data = fs.readFileSync(cacheFile, 'utf-8');
+    console.log(`Using cached data for ${key} (age: ${Math.round(age / 1000)}s)`);
+    return JSON.parse(data);
+  } catch (error) {
+    console.error(`Error reading cache for ${key}:`, error);
+    return null;
+  }
+}
+
+function saveCachedData(key: string, data: any): void {
+  try {
+    ensureCacheDir();
+    const cacheFile = getCacheFilePath(key);
+    fs.writeFileSync(cacheFile, JSON.stringify(data, null, 2), 'utf-8');
+    console.log(`Saved cache for ${key}`);
+  } catch (error) {
+    console.error(`Error saving cache for ${key}:`, error);
+  }
+}
 
 // Connect to Supabase
 async function connectSupabase(): Promise<SupabaseClient | null> {
