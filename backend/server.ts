@@ -101,6 +101,33 @@ function saveCachedData(key: string, data: any): void {
     }
 }
 
+
+function getCachedScript(topic: string): string | null {
+    try {
+        const scriptsFile = path.join(CACHE_DIR, 'topic_scripts.json');
+        
+        if (!fs.existsSync(scriptsFile)) {
+            console.log(`No topic_scripts.json file found`);
+            return null;
+        }
+
+        const scriptsData = JSON.parse(fs.readFileSync(scriptsFile, 'utf-8'));
+        
+        if (scriptsData[topic] && Array.isArray(scriptsData[topic]) && scriptsData[topic].length > 0) {
+            // Randomly select one of the 5 script variants
+            const randomIndex = Math.floor(Math.random() * scriptsData[topic].length);
+            console.log(`Using cached script variant ${randomIndex + 1} for topic: ${topic}`);
+            return scriptsData[topic][randomIndex];
+        }
+        
+        console.log(`No cached script found for topic: ${topic}`);
+        return null;
+    } catch (error) {
+        console.error(`Error reading cached script for ${topic}:`, error);
+        return null;
+    }
+}
+
 const LOCATION_FIELDS = new Set([
     'location', 'place', 'city', 'state', 'country', 'address',
     'geo', 'coordinates', 'lat', 'lon', 'latitude', 'longitude',
@@ -754,6 +781,16 @@ async function getTopicSelection(topic: string, count = 20): Promise<string[]> {
 }
 
 async function summarizeGemini(topic: string) {
+  // Check if API key is available, otherwise use cached scripts
+  if (!process.env.gemini_api_key && !process.env.OPENROUTER_API_KEY) {
+    console.log(`No API keys available - using cached script for topic: ${topic}`);
+    const cachedScript = getCachedScript(topic);
+    if (cachedScript) {
+      return cachedScript;
+    }
+    return "No summary available for this topic.";
+  }
+
   const tweets = await getTopicSelection(topic, 20);
   if (tweets.length === 0) return "No tweets available for this topic.";
   console.log(tweets);
@@ -867,22 +904,37 @@ async function generateAgenticInsight(topic: string) {
 
   // Fallback to Nemotron Nano
   try {
-    console.log("Using Nemotron Nano for insight generation");
-    const insight = await generateInsightWithNemotron(topic, tweets);
-    return {
-      success: true,
-      insight,
-      model: "nvidia/nemotron-nano-12b-v2-vl:free",
-      tweetCount: tweets.length
-    };
+    if (process.env.OPENROUTER_API_KEY) {
+      console.log("Using Nemotron Nano for insight generation");
+      const insight = await generateInsightWithNemotron(topic, tweets);
+      return {
+        success: true,
+        insight,
+        model: "nvidia/nemotron-nano-12b-v2-vl:free",
+        tweetCount: tweets.length
+      };
+    }
   } catch (error) {
     console.error("Nemotron API error:", error);
+  }
+
+  // Final fallback to cached scripts
+  console.log("No API keys available - using cached script");
+  const cachedScript = getCachedScript(topic);
+  if (cachedScript) {
     return {
-      success: false,
-      error: "Failed to generate insights with both Gemini and Nemotron",
-      model: "none"
+      success: true,
+      insight: cachedScript,
+      model: "cached-script",
+      tweetCount: tweets.length
     };
   }
+
+  return {
+    success: false,
+    error: "No AI API keys available and no cached script found for this topic",
+    model: "none"
+  };
 }
 
 async function generateContextualInsight(context: string, tweetTexts: string[], location?: string) {
@@ -901,50 +953,34 @@ async function generateContextualInsight(context: string, tweetTexts: string[], 
   
   // If no API keys, try to load from cache
   if (!hasApiKeys) {
-    console.log("No AI API keys found, using cached insights");
-    try {
-      const cacheData = JSON.parse(fs.readFileSync(path.join(__dirname, 'cache', 'customer_happiness_insights.json'), 'utf-8'));
-      
-      // Try exact match first
-      let cachedInsight = cacheData[context];
-      
-      // If no exact match, try fuzzy matching against topic names
-      if (!cachedInsight) {
-        const contextLower = context.toLowerCase();
-        const matchedTopic = Object.keys(cacheData).find(topic => {
-          const topicLower = topic.toLowerCase();
-          return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
-        });
-        
-        if (matchedTopic) {
-          cachedInsight = cacheData[matchedTopic];
-          console.log(`Fuzzy matched "${context}" to cached topic "${matchedTopic}"`);
-        } else {
-          // If still no match, return a generic insight based on the first cached topic
-          const firstTopic = Object.keys(cacheData)[0];
-          cachedInsight = {
-            ...cacheData[firstTopic],
-            happinessScore: 75,
-            sentiment: { positive: 65, negative: 20, neutral: 15 }
-          };
-          console.log(`No topic match found for "${context}", using generic cached insight`);
-        }
-      }
-      
-      if (cachedInsight) {
-        return {
-          success: true,
-          insight: formatCachedInsight(cachedInsight, context),
-          model: "cached-analysis",
-          tweetCount: tweetTexts.length,
-          context,
-          location,
-          cached: true
-        };
-      }
-    } catch (error) {
-      console.error("Error loading cached insights:", error);
+    console.log("No AI API keys found, using cached script");
+    const cachedScript = getCachedScript(context);
+    if (cachedScript) {
+      return {
+        success: true,
+        insight: cachedScript,
+        model: "cached-script",
+        tweetCount: tweetTexts.length,
+        context,
+        location
+      };
     }
+    
+    // If no script found for the exact context, try without "T-Mobile" prefix
+    const cleanedContext = context.replace(/^T-Mobile\s*/i, '');
+    const cleanedScript = getCachedScript(`T-Mobile ${cleanedContext}`);
+    if (cleanedScript) {
+      return {
+        success: true,
+        insight: cleanedScript,
+        model: "cached-script",
+        tweetCount: tweetTexts.length,
+        context,
+        location
+      };
+    }
+
+    console.log(`No cached script found for context: ${context}`);
   }
 
   try {

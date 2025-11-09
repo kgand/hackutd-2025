@@ -1,0 +1,629 @@
+{
+  "T-Mobile 5G": {
+    "happinessScore": 82,
+    "sentiment": {
+      "positive": 75,
+      "negative": 15,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Coverage drops to 4G LTE in Seattle and some suburban areas - causing customer frustration",
+      "Inconsistent 5G speeds between cities - creates expectation gaps"
+    ],
+    "momentsOfDelight": [
+      "Exceptional speeds (300-800+ Mbps) in major metros like Jacksonville, Columbus, Sacramento",
+      "Network expansion reaching neighborhoods previously underserved",
+      "Customers switching from competitors and reporting 'no regrets' - strong acquisition signal"
+    ],
+    "earlyWarningSignals": [
+      "Seattle market showing coverage complaints - needs infrastructure investment",
+      "Speed variability could lead to social media complaints if not addressed",
+      "Competitor switchers have high expectations - must maintain quality"
+    ],
+    "actionableRecommendations": [
+      "Priority: Deploy additional 5G infrastructure in Seattle metro area within 30 days",
+      "Launch proactive communication about 5G coverage maps in the app to set realistic expectations",
+      "Create customer success stories from high-speed test results for marketing campaigns",
+      "Monitor Seattle customer churn risk - offer service credits proactively"
+    ],
+    "locationInsights": "Strong performance in CA, FL, OH markets. Seattle WA needs immediate attention. Network expansion creating positive momentum in previously underserved neighborhoods.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Customer Service": {
+    "happinessScore": 78,
+    "sentiment": {
+      "positive": 70,
+      "negative": 20,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Long hold times during peak hours frustrating customers",
+      "Some support agents lack authority to resolve billing disputes immediately"
+    ],
+    "momentsOfDelight": [
+      "Customer service reps described as 'helpful' and 'patient'",
+      "Quick resolution of technical issues when escalated properly",
+      "Store staff going above and beyond to solve device problems"
+    ],
+    "earlyWarningSignals": [
+      "Wait time complaints could trend on social media during busy seasons",
+      "Billing dispute escalations taking multiple calls - friction point"
+    ],
+    "actionableRecommendations": [
+      "Implement callback queue system to reduce perceived wait times",
+      "Empower tier-1 agents with broader billing adjustment authority up to $50",
+      "Launch customer service response time dashboard - target <2min average",
+      "Highlight top-rated service stories in internal communications to boost morale"
+    ],
+    "locationInsights": "In-store experiences rated higher than phone support. Urban stores show better satisfaction scores than suburban locations.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Network": {
+    "happinessScore": 76,
+    "sentiment": {
+      "positive": 68,
+      "negative": 22,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Dead zones reported in rural areas and some suburban pockets",
+      "Network congestion during peak hours in dense urban areas"
+    ],
+    "momentsOfDelight": [
+      "Reliable connectivity in major cities and highways",
+      "Network improvements noticed by long-term customers",
+      "Excellent coverage in tourist destinations and airports"
+    ],
+    "earlyWarningSignals": [
+      "Rural customers feeling left behind - potential churn risk",
+      "Peak hour slowdowns could drive enterprise customers to competitors",
+      "Comparison posts with Verizon coverage emerging"
+    ],
+    "actionableRecommendations": [
+      "Publish transparent coverage map updates quarterly to build trust",
+      "Target rural expansion in high-value corridors within 90 days",
+      "Implement network congestion alerts via app to set expectations",
+      "Create 'Network Improvement Guarantee' program for affected areas"
+    ],
+    "locationInsights": "Strong urban coverage, rural gaps in Midwest and Mountain regions. Highway corridor coverage excellent for road travelers.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Deals": {
+    "happinessScore": 85,
+    "sentiment": {
+      "positive": 80,
+      "negative": 8,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Fine print confusion on promotional offers - customers feeling misled",
+      "Deal expiration creating FOMO and rushed decisions"
+    ],
+    "momentsOfDelight": [
+      "Trade-in values exceeding customer expectations",
+      "Bundle deals (phone + plan) providing genuine savings",
+      "Limited-time offers creating excitement and urgency",
+      "Price match guarantees building trust"
+    ],
+    "earlyWarningSignals": [
+      "Fine print complaints could damage brand trust if not clarified",
+      "Deal fatigue - constant promotions may cheapen brand perception"
+    ],
+    "actionableRecommendations": [
+      "Simplify promotional terms - use plain language summaries",
+      "Create 'Deal Decoder' tool in app to help customers compare offers",
+      "Extend deal grace period by 48hrs for customers who inquired but didn't convert",
+      "Launch educational content on how to maximize trade-in values"
+    ],
+    "locationInsights": "Highest engagement in competitive markets (NYC, LA, Chicago). Deal satisfaction correlates with store staff explanation quality.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "Magenta Monday": {
+    "happinessScore": 88,
+    "sentiment": {
+      "positive": 85,
+      "negative": 5,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Website crashes during high-traffic deal launches",
+      "Limited inventory selling out too quickly - customer disappointment"
+    ],
+    "momentsOfDelight": [
+      "Exclusive device deals creating genuine excitement",
+      "Early access for loyal customers building VIP feeling",
+      "Flash sales generating social media buzz organically",
+      "Surprise perks delighting existing customers"
+    ],
+    "earlyWarningSignals": [
+      "Website performance issues could drive customers to competitors during deals",
+      "Inventory shortages creating negative sentiment - 'bait and switch' perception"
+    ],
+    "actionableRecommendations": [
+      "Scale web infrastructure 3x before major Monday launches",
+      "Implement virtual queue system with estimated wait times",
+      "Send early access invites to high-value customers 1hr before public launch",
+      "Stock buffer inventory 20% above projected demand to avoid sellouts"
+    ],
+    "locationInsights": "Strongest engagement on West Coast (early morning launch time). East Coast customers requesting later launch times for accessibility.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Home Internet": {
+    "happinessScore": 81,
+    "sentiment": {
+      "positive": 73,
+      "negative": 15,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Speed throttling during peak hours frustrating work-from-home customers",
+      "Setup complexity - some customers needing multiple support calls"
+    ],
+    "momentsOfDelight": [
+      "Price point beating cable competitors by 30-40%",
+      "No contract flexibility highly valued",
+      "Reliable speeds for streaming and video calls when working properly",
+      "Easy cancellation process building trust"
+    ],
+    "earlyWarningSignals": [
+      "Peak hour throttling could drive WFH professionals to fiber competitors",
+      "Setup friction causing day-1 cancellations - critical window",
+      "Comparison with Starlink emerging in rural discussions"
+    ],
+    "actionableRecommendations": [
+      "Deploy network priority updates in top 20 metros within 60 days",
+      "Launch white-glove setup service ($50 fee, waived for first 10k customers)",
+      "Create speed guarantee program - credit if speeds fall below 50Mbps during business hours",
+      "Develop YouTube setup tutorial series addressing top 5 issues"
+    ],
+    "locationInsights": "Suburban and rural adoption exceeding urban. Strongest satisfaction in areas without fiber competition. Texas and Florida leading growth.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Tuesdays": {
+    "happinessScore": 90,
+    "sentiment": {
+      "positive": 87,
+      "negative": 3,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "App crashes on Tuesday mornings during peak redemption",
+      "Popular rewards running out within minutes"
+    ],
+    "momentsOfDelight": [
+      "Free Dunkin', Wendy's, and other food deals creating weekly habit",
+      "Exclusive concert ticket access driving loyalty",
+      "Gas discounts saving customers real money weekly",
+      "Partner variety keeping program fresh and exciting"
+    ],
+    "earlyWarningSignals": [
+      "App performance issues could kill the Tuesday ritual",
+      "Reward inventory shortages creating disappointment - 'why bother' sentiment"
+    ],
+    "actionableRecommendations": [
+      "Pre-load deals at midnight to spread redemption traffic across morning hours",
+      "Increase partner inventory allocations by 25% based on historical demand",
+      "Add 'Rain Check' feature - guarantee deal if claimed within first hour but out of stock",
+      "Gamify experience with streak bonuses - redeem 4 Tuesdays in a row for bonus reward"
+    ],
+    "locationInsights": "Highest engagement in suburbs where partner locations are most accessible. Urban millennials love coffee deals most. Family plan users redeem at 3x rate of individuals.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Trade-In": {
+    "happinessScore": 79,
+    "sentiment": {
+      "positive": 71,
+      "negative": 18,
+      "neutral": 11
+    },
+    "criticalIssues": [
+      "Trade-in value disputes after device inspection - customers feeling 'bait and switched'",
+      "Long processing times (7-14 days) before credit applied"
+    ],
+    "momentsOfDelight": [
+      "Competitive trade-in values exceeding competitors",
+      "Smooth process when device condition matches expectations",
+      "Instant credit offers at retail stores",
+      "Old device recycling program environmental appeal"
+    ],
+    "earlyWarningSignals": [
+      "Value reduction complaints trending - trust erosion risk",
+      "Processing delays causing bill shock before credits apply",
+      "Competitor (Apple, Best Buy) instant trade-in creating comparison pressure"
+    ],
+    "actionableRecommendations": [
+      "Implement AI-powered condition assessment tool in app - customers pre-verify device before shipping",
+      "Reduce processing SLA to 5 business days maximum",
+      "Offer instant provisional credit (80% of quoted value) while device in review",
+      "Create trade-in guarantee - honor quoted price if device matches customer photos"
+    ],
+    "locationInsights": "In-store trade-ins have 95% satisfaction vs 72% for mail-in. Texas, California stores processing highest volume. Rural customers prefer mail-in despite longer wait.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Upgrade": {
+    "happinessScore": 77,
+    "sentiment": {
+      "positive": 69,
+      "negative": 19,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Upgrade eligibility confusion - customers unaware they qualify",
+      "Hidden fees appearing during checkout process",
+      "Data transfer complications during in-store upgrades"
+    ],
+    "momentsOfDelight": [
+      "Early upgrade options for loyal customers appreciated",
+      "Staff helping with data transfer and setup",
+      "Same-day device availability in stores",
+      "Trade-in credit stacking with upgrade deals"
+    ],
+    "earlyWarningSignals": [
+      "Fee transparency issues could damage trust and viral social media complaints",
+      "Upgrade path complexity driving customers to buy unlocked devices elsewhere",
+      "Apple/Samsung direct purchase programs creating bypass behavior"
+    ],
+    "actionableRecommendations": [
+      "Send proactive 'You're Eligible to Upgrade' notifications 30 days before eligibility",
+      "Display all-in pricing upfront - eliminate checkout surprises",
+      "Launch free data transfer service in all retail locations",
+      "Create upgrade rewards program - every 2 years earn $100 accessory credit"
+    ],
+    "locationInsights": "Highest upgrade rates in stores vs online (63% vs 37%). Premium urban locations driving flagship device upgrades. Budget-conscious markets preferring mid-tier devices.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Coverage": {
+    "happinessScore": 74,
+    "sentiment": {
+      "positive": 65,
+      "negative": 25,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Indoor building penetration issues in concrete structures",
+      "Dead zones along specific highway corridors",
+      "Rural coverage gaps frustrating traveling customers"
+    ],
+    "momentsOfDelight": [
+      "Excellent coverage in major metros and airports",
+      "Recent tower additions improving previously weak areas",
+      "International roaming coverage exceeding expectations",
+      "Coverage map accuracy building trust"
+    ],
+    "earlyWarningSignals": [
+      "Building penetration complaints could drive enterprise customer churn",
+      "Highway dead zones creating safety concerns for travelers",
+      "Verizon coverage comparisons trending in competitor analysis posts"
+    ],
+    "actionableRecommendations": [
+      "Deploy small cell infrastructure in problematic urban buildings (target: 50 buildings/quarter)",
+      "Partner with state DOT to fill highway corridor gaps on major routes",
+      "Launch 'Coverage Guarantee' - 30-day money back if coverage doesn't meet expectations",
+      "Implement coverage prediction tool in app - warn customers before entering low-signal areas"
+    ],
+    "locationInsights": "Urban coverage strong (85% satisfaction). Suburban mixed (70%). Rural challenged (55%). Mountain/desert regions need most improvement. Highway I-80, I-70 corridors flagged.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Billing": {
+    "happinessScore": 72,
+    "sentiment": {
+      "positive": 62,
+      "negative": 28,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Unexpected charges appearing on bills - lack of transparency",
+      "Autopay discounts not applying correctly - system errors",
+      "Bill explanation unclear - customers can't understand line items"
+    ],
+    "momentsOfDelight": [
+      "Competitive pricing vs competitors",
+      "Easy online payment portal",
+      "Paperless billing incentives appreciated",
+      "Quick credit adjustments when errors identified"
+    ],
+    "earlyWarningSignals": [
+      "Billing disputes are #1 churn driver - immediate attention needed",
+      "Autopay failures causing service disruptions - trust damage",
+      "Bill complexity creating customer service call volume spikes"
+    ],
+    "actionableRecommendations": [
+      "URGENT: Audit autopay system - fix discount application bugs within 2 weeks",
+      "Redesign bill format with plain-language explanations for each charge",
+      "Implement bill preview feature - show estimated next bill 7 days before cycle end",
+      "Create 'Bill Guarantee' - automatic $10 credit if any unexpected charge over $5 appears",
+      "Launch SMS alerts for any bill amount change >10% from previous month"
+    ],
+    "locationInsights": "Billing complaints consistent across all regions - systemic issue not geographic. Autopay usage highest in 35-54 age demographic. Paper bill customers have fewer dispute issues.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Store": {
+    "happinessScore": 80,
+    "sentiment": {
+      "positive": 74,
+      "negative": 14,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Long wait times during weekends and lunch hours",
+      "Inconsistent staff knowledge between locations",
+      "Pushy sales tactics reported at some franchise locations"
+    ],
+    "momentsOfDelight": [
+      "Knowledgeable staff helping with complex technical issues",
+      "Clean, modern store environments",
+      "Device demos and hands-on experience before purchase",
+      "Same-day problem resolution vs phone support delays"
+    ],
+    "earlyWarningSignals": [
+      "Wait time frustration driving customers to online-only competitors",
+      "Franchise vs corporate experience gap creating inconsistent brand perception",
+      "Pushy sales reputation could damage premium brand positioning"
+    ],
+    "actionableRecommendations": [
+      "Deploy queue management system with SMS notifications - customers can wait elsewhere",
+      "Standardize training across corporate and franchise locations - monthly certification tests",
+      "Implement mystery shopper program - penalize pushy sales, reward consultative approach",
+      "Launch appointment booking system for complex issues (trade-ins, business accounts)",
+      "Staff optimization: add 1-2 more reps in stores with >30min average wait times"
+    ],
+    "locationInsights": "Urban flagship stores highest satisfaction (85%). Suburban franchise locations more variable (68-82%). Mall locations busiest weekends. Standalone stores better weekday experience.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Plans": {
+    "happinessScore": 83,
+    "sentiment": {
+      "positive": 77,
+      "negative": 11,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Plan comparison complexity - too many options confusing customers",
+      "Unlimited plan throttling terms buried in fine print"
+    ],
+    "momentsOfDelight": [
+      "Magenta MAX truly unlimited - customers love no throttling",
+      "Netflix, Apple TV+ inclusions adding tangible value",
+      "Military and first responder discounts showing appreciation",
+      "Price lock guarantee building long-term trust"
+    ],
+    "earlyWarningSignals": [
+      "Plan complexity causing analysis paralysis - potential lost sales",
+      "Fine print throttling details could become PR issue if exposed",
+      "Competitors simplifying plan lineups - T-Mobile seems complicated"
+    ],
+    "actionableRecommendations": [
+      "Streamline to 3 core plans: Essentials, Magenta, Magenta MAX (eliminate sub-tiers)",
+      "Create interactive plan selector quiz on website - recommends best fit in <2min",
+      "Make throttling terms prominent - build trust through transparency",
+      "Launch 'Plan Fit Guarantee' - switch plans free within 30 days if customer unhappy"
+    ],
+    "locationInsights": "Unlimited plans most popular in urban areas (streaming, hotspot usage). Rural customers prefer lower-tier plans with WiFi calling. Family plan adoption 4x higher in suburbs.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Prepaid": {
+    "happinessScore": 75,
+    "sentiment": {
+      "positive": 67,
+      "negative": 21,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Auto-refill failures causing service interruptions",
+      "Less priority on network during congestion - customers notice",
+      "Limited customer service options vs postpaid"
+    ],
+    "momentsOfDelight": [
+      "Affordable entry point for budget-conscious customers",
+      "No credit check appreciated by underserved segments",
+      "Flexible refill amounts and timing",
+      "Access to same T-Mobile network as postpaid"
+    ],
+    "earlyWarningSignals": [
+      "Auto-refill issues driving customers to competitors (Cricket, Metro)",
+      "Network deprioritization becoming more noticeable as network traffic grows",
+      "Customer service gap creating second-class citizen perception"
+    ],
+    "actionableRecommendations": [
+      "Fix auto-refill system bugs - 99.9% success rate target",
+      "Reduce deprioritization threshold from 50GB to 35GB - minimize customer impact",
+      "Extend customer service hours for prepaid to match postpaid",
+      "Create prepaid loyalty rewards - every 6 months get 1GB bonus data",
+      "Launch in-app wallet feature - manage refills and view usage real-time"
+    ],
+    "locationInsights": "Highest prepaid usage in urban areas with immigrant populations, college towns, and economically diverse communities. Retail store refills preferred over online in certain demographics.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Business": {
+    "happinessScore": 78,
+    "sentiment": {
+      "positive": 71,
+      "negative": 17,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Account management complexity for multi-line businesses",
+      "Dedicated support response times slower than competitors",
+      "Device procurement delays affecting business operations"
+    ],
+    "momentsOfDelight": [
+      "Competitive pricing for 10+ line accounts",
+      "Business-specific features (call forwarding, conference calling)",
+      "Dedicated account reps for larger accounts",
+      "Mobile device management tools for IT departments"
+    ],
+    "earlyWarningSignals": [
+      "Enterprise customers comparing to Verizon's business focus - churn risk",
+      "Device delays causing lost productivity - could lose corporate accounts",
+      "Small business segment feeling neglected vs large enterprise focus"
+    ],
+    "actionableRecommendations": [
+      "Launch dedicated business support hotline - <5min hold time SLA",
+      "Create tiered account management: 10-50 lines (online tools), 50-200 (dedicated rep), 200+ (team)",
+      "Implement device pre-ordering system for business accounts - guarantee stock",
+      "Develop small business playbook - optimized plans for <25 employee companies",
+      "Partner with business software (Slack, Zoom) for exclusive integrations"
+    ],
+    "locationInsights": "Business accounts concentrated in major metros (NYC, SF, Chicago, Austin). Tech startups in SF/Austin prioritizing value. Traditional businesses in NYC/Chicago prioritizing reliability.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Roaming": {
+    "happinessScore": 84,
+    "sentiment": {
+      "positive": 79,
+      "negative": 10,
+      "neutral": 11
+    },
+    "criticalIssues": [
+      "Unexpected roaming charges in border areas (Canada/Mexico)",
+      "Data speed throttling in some international locations"
+    ],
+    "momentsOfDelight": [
+      "Free international data and texting in 215+ countries",
+      "No surprise bills after international travel",
+      "Roaming works seamlessly - no manual setup needed",
+      "Cruise ship and airline WiFi deals"
+    ],
+    "earlyWarningSignals": [
+      "Border area charges causing confusion - needs clearer communication",
+      "Throttled international speeds frustrating business travelers - premium opportunity"
+    ],
+    "actionableRecommendations": [
+      "Auto-send SMS when customer approaches border areas - explain roaming rates",
+      "Create 'Business Traveler Pass' - $10/day for high-speed international data",
+      "Implement roaming usage alerts - notify at 50%, 80%, 100% of included data",
+      "Partner with major airlines for free WiFi passes (Magenta MAX perk)"
+    ],
+    "locationInsights": "Highest satisfaction among frequent international travelers. Border state customers need clearer guidance. Cruise passengers love maritime coverage. European travel most common destination.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile App": {
+    "happinessScore": 76,
+    "sentiment": {
+      "positive": 68,
+      "negative": 19,
+      "neutral": 13
+    },
+    "criticalIssues": [
+      "App crashes during bill payment process - causing failed payments",
+      "Login issues requiring password resets frequently",
+      "Slow load times on older devices"
+    ],
+    "momentsOfDelight": [
+      "Bill payment in <1 minute when working properly",
+      "Usage tracking helps customers avoid overages",
+      "5G coverage map feature highly useful",
+      "T-Mobile Tuesdays integration convenient"
+    ],
+    "earlyWarningSignals": [
+      "App reliability issues driving customers back to website or phone support",
+      "Payment failures causing service interruptions - critical customer journey",
+      "Competitor apps rated higher in app stores - perception gap"
+    ],
+    "actionableRecommendations": [
+      "URGENT: Fix payment flow crash bugs - deploy hotfix within 1 week",
+      "Optimize app performance for devices 3+ years old - 40% of user base",
+      "Implement biometric login as default - reduce password friction",
+      "Add offline mode - view account details even without connectivity",
+      "Launch app rating campaign after successful interactions - boost app store score"
+    ],
+    "locationInsights": "App usage highest among under-35 demographic. Rural areas experience more crashes (network dependency). iOS app rated higher than Android (4.5 vs 3.8 stars).",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Support": {
+    "happinessScore": 77,
+    "sentiment": {
+      "positive": 69,
+      "negative": 20,
+      "neutral": 11
+    },
+    "criticalIssues": [
+      "Social media (@TMobileHelp) response times inconsistent (2hrs to 2 days)",
+      "Complex issues requiring multiple handoffs between departments",
+      "Overseas support centers struggling with US-specific technical issues"
+    ],
+    "momentsOfDelight": [
+      "Social media team friendly and helpful when they respond",
+      "Tech support resolving device issues effectively",
+      "Proactive outage notifications appreciated",
+      "Community forum peer support saving customers time"
+    ],
+    "earlyWarningSignals": [
+      "Twitter/X complaints going viral when response time exceeds 24hrs",
+      "Multi-handoff issues creating customer exhaustion - churn driver",
+      "Technical knowledge gaps damaging brand as devices become more complex"
+    ],
+    "actionableRecommendations": [
+      "Guarantee social media response within 2 hours during business hours, 4hrs after hours",
+      "Create 'Single Point of Contact' program - one rep owns issue from start to resolution",
+      "Enhance technical training - quarterly device certification for all support reps",
+      "Launch self-service troubleshooting bot - resolve 40% of issues without human interaction",
+      "Implement customer effort score (CES) tracking - target <2 contacts per issue resolution"
+    ],
+    "locationInsights": "Phone support satisfaction varies by time zone (West Coast calls rated lower - staffing issue?). Chat support preferred by under-30 demographic. Store support highest satisfaction.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Promotions": {
+    "happinessScore": 86,
+    "sentiment": {
+      "positive": 81,
+      "negative": 7,
+      "neutral": 12
+    },
+    "criticalIssues": [
+      "Promotion stacking rules unclear - customer confusion",
+      "Limited-time offers expiring before customers can take advantage"
+    ],
+    "momentsOfDelight": [
+      "Generous new customer promotions driving switches",
+      "Existing customer appreciation offers building loyalty",
+      "Clear savings vs competitors in promotional materials",
+      "Easy redemption process for most offers"
+    ],
+    "earlyWarningSignals": [
+      "Promotional complexity could backfire if customers feel deceived",
+      "Existing customers jealous of new customer deals - loyalty risk"
+    ],
+    "actionableRecommendations": [
+      "Create promotion eligibility checker tool - customers know instantly if they qualify",
+      "Extend offer windows to 30 days minimum - reduce urgency-based frustration",
+      "Launch 'Loyalty Match' program - existing customers get access to new customer deals annually",
+      "Simplify stacking rules - make it obvious what can combine",
+      "Send personalized promotion alerts based on customer account history"
+    ],
+    "locationInsights": "Highest promotion redemption in competitive markets (NYC, LA, Chicago). Rural areas less aware of ongoing promotions. Email open rates 31%, SMS 67% - shift channel mix.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile Family Plan": {
+    "happinessScore": 87,
+    "sentiment": {
+      "positive": 83,
+      "negative": 6,
+      "neutral": 11
+    },
+    "criticalIssues": [
+      "Managing multiple lines complicated for non-tech-savvy account holders",
+      "Kid line controls and restrictions require app improvements"
+    ],
+    "momentsOfDelight": [
+      "Significant per-line savings vs individual plans",
+      "Easy to add/remove family members",
+      "Separate billing visibility for each line",
+      "Parental controls and usage monitoring for kids",
+      "Free Netflix for families a huge win"
+    ],
+    "earlyWarningSignals": [
+      "Account management complexity could frustrate primary account holders - support burden",
+      "Kids outgrowing restrictions may drive line splits - revenue risk"
+    ],
+    "actionableRecommendations": [
+      "Launch 'Family Hub' app feature - simple dashboard for primary account holder to manage all lines",
+      "Add granular kid controls - app-by-app permissions, time limits, content filters",
+      "Create family data pool sharing - avoid overage charges for one family member",
+      "Implement 'Graduate to Adult Line' promotion - incentivize keeping families together as kids age",
+      "Add family location sharing feature (opt-in) for safety - compete with Life360"
+    ],
+    "locationInsights": "Highest family plan adoption in suburbs (72% vs 41% urban). Average family size 4.2 lines. Families with teens use 60% more data than couples-only plans.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  }
+}

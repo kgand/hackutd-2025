@@ -190,8 +190,8 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
   }, []);
 
     return (
-    <div className="bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 min-h-screen flex items-center justify-center p-3">
-      <div className="flex flex-col md:flex-row items-stretch md:items-stretch justify-center gap-4 w-full">
+    <div className="bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 min-h-screen flex flex-col items-center justify-center p-3">
+      <div className="flex flex-col md:flex-row items-stretch md:items-stretch justify-center gap-4 w-full flex-1">
         {}
         <div className="w-[min(36vw,360px)]  h-[min(96vh,960px)] flex flex-col gap-4 min-h-0">
           <GlassCard className="flex-1 min-h-0">
@@ -283,11 +283,6 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                                 />
                             )}
                         </GlassCard>
-                        <GlassCard className="flex-[1.5] min-h-0 overflow-hidden">
-                            <div className="w-full h-full">
-                              <OutageMonitor />
-                            </div>
-                        </GlassCard>
                     </div>
                 </div>
 
@@ -321,10 +316,20 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                     title={clusterMeta?.cluster_title ?? `Cluster ${cid ?? ""}`}
                     summary={clusterMeta?.cluster_summary ?? (focusedNode.article_summary ?? null)}
                     articles={clusterArticles}
+                    articleCount={clusterArticles.length}
                   />
                 );
               })()
             )}
+          </div>
+        </GlassCard>
+      </div>
+      
+      {}
+      <div className="w-full mt-4">
+        <GlassCard className="min-h-0 overflow-hidden">
+          <div className="w-full h-[200px]">
+            <OutageMonitor />
           </div>
         </GlassCard>
       </div>
