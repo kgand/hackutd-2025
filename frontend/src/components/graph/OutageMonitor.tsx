@@ -117,7 +117,7 @@ const OutageMonitor: React.FC = () => {
           <div className="flex items-center gap-3">
             <div className="w-1 h-8 bg-gradient-to-b from-blue-400 to-blue-600 rounded-full" />
             <CardTitle className="text-lg font-semibold tracking-tight text-white/95">
-              Network Status Monitor
+              DownDetector Monitor
             </CardTitle>
           </div>
           <div className="flex items-center gap-4">

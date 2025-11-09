@@ -190,10 +190,10 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
   }, []);
 
     return (
-    <div className="bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 min-h-screen flex flex-col items-center justify-center p-3">
-      <div className="flex flex-col md:flex-row items-stretch md:items-stretch justify-center gap-4 w-full flex-1">
-        {}
-        <div className="w-[min(36vw,360px)]  h-[min(96vh,960px)] flex flex-col gap-4 min-h-0">
+    <div className="bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 min-h-screen flex items-center justify-center p-3">
+      <div className="flex flex-col md:flex-row items-stretch md:items-stretch justify-center gap-4 w-full h-[96vh]">
+        {/* Left Sidebar - Topics */}
+        <div className="w-[min(36vw,360px)] flex flex-col gap-4 min-h-0">
           <GlassCard className="flex-1 min-h-0">
             <div className="p-4 flex flex-col gap-3 h-full no-scrollbar overflow-auto">
               <div className="flex items-center justify-center py-4 border-b border-purple-500/20 gap-3">
@@ -236,58 +236,62 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
           </GlassCard>
         </div>
 
-                <div className="flex-1 flex-col items-center justify-center ">
-                    {}
-                    <div className="w-[min(60vw,1020px)] h-[min(96vh,960px)] flex flex-col gap-4">
-                        <GlassCard className="flex-[3] min-h-0 overflow-hidden">
-                            {error ? (
-                                <div className="p-4 text-red-400 font-light lowercase tracking-wide">{error}</div>
-                            ) : loading ? (
-                                <div className="p-4 text-gray-300 font-light lowercase tracking-wide">loading graph…</div>
-                            ) : (
-                                <ForceGraph
-                                    nodes={nodes}
-                                    links={links}
-                                    chargeStrength={-150}
-                                    width={1100}
-                                    height={1000}
-                                    onNodeClick={(node) => {
-                                      setFocusedNode(node);
-                                      if (node.type === "cluster" && node.cluster_id != null) {
-                                        setSelectedClusterId(node.cluster_id);
-                                      }
-                                    }}
-                                    showLabels={true}
-                                    zoom
-                                    centerOnClusterId={selectedClusterId}
-                                    centerScale={1.8}
-
-                  nodeFill={(d) =>
-                    d.type === "article"
-                      ? "#FF00FF"
-                      : (selectedClusterId != null && d.cluster_id === selectedClusterId
-                          ? "#FFFFFF"
-                          : clusterColor(d.cluster_id))
+        {/* Center - Graph and DownDetector Monitor */}
+        <div className="flex-1 flex flex-col gap-4 min-h-0">
+          {/* Graph - 70% */}
+          <GlassCard className="flex-[7] min-h-0 overflow-hidden">
+            {error ? (
+              <div className="p-4 text-red-400 font-light lowercase tracking-wide">{error}</div>
+            ) : loading ? (
+              <div className="p-4 text-gray-300 font-light lowercase tracking-wide">loading graph…</div>
+            ) : (
+              <ForceGraph
+                nodes={nodes}
+                links={links}
+                chargeStrength={-150}
+                width={1100}
+                height={1000}
+                onNodeClick={(node) => {
+                  setFocusedNode(node);
+                  if (node.type === "cluster" && node.cluster_id != null) {
+                    setSelectedClusterId(node.cluster_id);
                   }
+                }}
+                showLabels={true}
+                zoom
+                centerOnClusterId={selectedClusterId}
+                centerScale={1.8}
+                nodeFill={(d) =>
+                  d.type === "article"
+                    ? "#FF00FF"
+                    : (selectedClusterId != null && d.cluster_id === selectedClusterId
+                        ? "#FFFFFF"
+                        : clusterColor(d.cluster_id))
+                }
+                nodeRadius={(d) => {
+                  if (d.type === "cluster") {
+                    const base = 14;
+                    const selected = 20;
+                    return d.cluster_id != null && d.cluster_id === selectedClusterId ? selected : base;
+                  } else {
+                    return 5;
+                  }
+                }}
+                sizeByDegree={false}
+              />
+            )}
+          </GlassCard>
+          
+          {/* DownDetector Monitor - 30% */}
+          <GlassCard className="flex-[3] min-h-0 overflow-hidden">
+            <div className="w-full h-full">
+              <OutageMonitor />
+            </div>
+          </GlassCard>
+        </div>
 
-                  nodeRadius={(d) => {
-                    if (d.type === "cluster") {
-                      const base = 14;
-                      const selected = 20;
-                      return d.cluster_id != null && d.cluster_id === selectedClusterId ? selected : base;
-                    } else {
-                      return 5;
-                    }
-                  }}
-                                    sizeByDegree={false}
-                                />
-                            )}
-                        </GlassCard>
-                    </div>
-                </div>
-
-        {}
-        <GlassCard className="w-[min(36vw,500px)] h-[min(96vh,960px)] min-h-0 overflow-hidden flex flex-col">
+        {/* Right Sidebar - Details */}
+        <GlassCard className="w-[min(36vw,500px)] min-h-0 overflow-hidden flex flex-col">
           <div className="p-4 space-y-4 h-full overflow-auto no-scrollbar">
             {!focusedNode ? (
               <div className="text-purple-200/60 text-center font-light lowercase tracking-wide py-8">
@@ -321,15 +325,6 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                 );
               })()
             )}
-          </div>
-        </GlassCard>
-      </div>
-      
-      {}
-      <div className="w-full mt-4">
-        <GlassCard className="min-h-0 overflow-hidden">
-          <div className="w-full h-[200px]">
-            <OutageMonitor />
           </div>
         </GlassCard>
       </div>

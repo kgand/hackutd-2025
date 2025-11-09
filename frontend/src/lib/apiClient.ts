@@ -24,11 +24,12 @@ async function checkBackendAvailability(): Promise<boolean> {
 }
 
 // Fetch with fallback to local cache
-export async function fetchWithFallback(endpoint: string): Promise<any> {
+export async function fetchWithFallback(endpoint: string, options?: RequestInit): Promise<any> {
   try {
     // Try backend first
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
       signal: AbortSignal.timeout(3000), // 3 second timeout
+      ...options,
     });
     
     if (response.ok) {
@@ -125,4 +126,95 @@ export const api = {
   getSentimentAll: () => fetchWithFallback('/api/sentiment/all'),
   getDownDetector: () => fetchWithFallback('/api/downdetector'),
   getSummary: (topic: string) => fetchWithFallback(`/api/summary/${topic}`),
+  
+  // POST endpoint for insights analysis with cache fallback
+  analyzeInsights: async (context: string, tweets: string[], location?: string) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/insights/analyze`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ context, tweets, location }),
+        signal: AbortSignal.timeout(5000), // 5 second timeout for AI operations
+      });
+      
+      if (response.ok) {
+        backendAvailable = true;
+        return await response.json();
+      }
+    } catch (error) {
+      console.log(`Backend unavailable for insights, falling back to cached happiness index`);
+      backendAvailable = false;
+    }
+    
+    // Fallback to cached customer happiness insights
+    try {
+      const cacheResponse = await fetch('/cache/customer_happiness_insights.json');
+      if (cacheResponse.ok) {
+        const allInsights = await cacheResponse.json();
+        
+        // Try exact match first
+        let cachedInsight = allInsights[context];
+        
+        // If no exact match, try fuzzy matching
+        if (!cachedInsight) {
+          const contextLower = context.toLowerCase();
+          const matchedTopic = Object.keys(allInsights).find(topic => {
+            const topicLower = topic.toLowerCase();
+            return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
+          });
+          
+          if (matchedTopic) {
+            cachedInsight = allInsights[matchedTopic];
+            console.log(`Fuzzy matched "${context}" to "${matchedTopic}"`);
+          }
+        }
+        
+        if (cachedInsight) {
+          // Format cached insight to match API response
+          const formattedInsight = `📊 **HAPPINESS SCORE: ${cachedInsight.happinessScore}/100**
+
+😊 **SENTIMENT BREAKDOWN**
+• Positive: ${cachedInsight.sentiment.positive}%
+• Negative: ${cachedInsight.sentiment.negative}%
+• Neutral: ${cachedInsight.sentiment.neutral}%
+
+🔥 **CRITICAL ISSUES**
+${cachedInsight.criticalIssues.map((issue: string) => `• ${issue}`).join('\n')}
+
+✨ **MOMENTS OF DELIGHT**
+${cachedInsight.momentsOfDelight.map((moment: string) => `• ${moment}`).join('\n')}
+
+⚠️ **EARLY WARNING SIGNALS**
+${cachedInsight.earlyWarningSignals.map((signal: string) => `• ${signal}`).join('\n')}
+
+🎯 **ACTIONABLE RECOMMENDATIONS**
+${cachedInsight.actionableRecommendations.map((rec: string) => `• ${rec}`).join('\n')}
+
+📍 **LOCATION/TIME INSIGHTS**
+${cachedInsight.locationInsights}
+
+---
+*Note: This analysis is based on pre-analyzed historical data. Backend unavailable.*`;
+          
+          return {
+            success: true,
+            insight: formattedInsight,
+            model: 'cached-analysis',
+            tweetCount: tweets.length,
+            context,
+            location,
+            cached: true,
+            timestamp: new Date().toISOString()
+          };
+        }
+      }
+    } catch (cacheError) {
+      console.error('Error loading cached insights:', cacheError);
+    }
+    
+    // Last resort: return error
+    throw new Error('Unable to analyze insights: backend unavailable and no cached data found');
+  }
 };

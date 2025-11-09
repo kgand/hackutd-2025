@@ -493,7 +493,10 @@ const handleTopicSelect = useCallback((topic: string | null) => {
 
         {}
         <div className="pointer-events-auto mr-4 mt-4 flex flex-col gap-4">
-          <HoverInfoPanel className="w-64" hoverInfo={hoverInfo} />
+          {/* Only show HoverInfoPanel when there's actual hover info (location data) */}
+          {hoverInfo && hoverInfo.tweets && hoverInfo.tweets.length > 0 && (
+            <HoverInfoPanel className="w-64" hoverInfo={hoverInfo} />
+          )}
           <InsightsPanel
             className="w-64"
             topic={selectedTopic}

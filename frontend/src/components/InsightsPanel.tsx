@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { api } from '../lib/apiClient';
 
 interface InsightsPanelProps {
   topic: string | null;
@@ -15,6 +17,13 @@ interface InsightData {
   timestamp: string;
   context: string;
   location?: string;
+  sentiment?: {
+    positive: number;
+    neutral: number;
+    negative: number;
+  };
+  criticalIssues?: string[];
+  momentsOfDelight?: string[];
 }
 
 export function InsightsPanel({ topic, currentData, hoveredTweets, className }: InsightsPanelProps) {
@@ -22,30 +31,26 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
   const [insightData, setInsightData] = useState<InsightData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [lastAnalyzedContext, setLastAnalyzedContext] = useState<string>('');
+  const [selectedSegment, setSelectedSegment] = useState<'positive' | 'negative' | null>(null);
 
   const analyzeContext = async (context: string, tweets: string[], location?: string) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3000/api/insights/analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          context,
-          tweets,
-          location
-        }),
+      const data = await api.analyzeInsights(context, tweets, location);
+      
+      // Calculate sentiment breakdown from tweets
+      const sentiment = calculateSentiment(tweets);
+      const criticalIssues = extractCriticalIssues(tweets);
+      const momentsOfDelight = extractMomentsOfDelight(tweets);
+      
+      setInsightData({
+        ...data,
+        sentiment,
+        criticalIssues,
+        momentsOfDelight
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate Customer Happiness insights');
-      }
-
-      const data = await response.json();
-      setInsightData(data);
       setLastAnalyzedContext(context + (location || ''));
     } catch (err) {
       console.error('Error generating Customer Happiness insights:', err);
@@ -53,6 +58,44 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const calculateSentiment = (tweets: string[]) => {
+    // Simple sentiment analysis - in production this would use the API
+    const total = tweets.length;
+    const negativeKeywords = ['bad', 'terrible', 'worst', 'horrible', 'awful', 'disappointing', 'frustrated', 'angry', 'issue', 'problem'];
+    const positiveKeywords = ['great', 'excellent', 'amazing', 'love', 'best', 'awesome', 'fantastic', 'wonderful', 'perfect', 'impressed'];
+    
+    let negative = 0;
+    let positive = 0;
+    
+    tweets.forEach(tweet => {
+      const lowerTweet = tweet.toLowerCase();
+      if (negativeKeywords.some(kw => lowerTweet.includes(kw))) negative++;
+      else if (positiveKeywords.some(kw => lowerTweet.includes(kw))) positive++;
+    });
+    
+    const neutral = total - negative - positive;
+    
+    return {
+      positive: Math.round((positive / total) * 100),
+      neutral: Math.round((neutral / total) * 100),
+      negative: Math.round((negative / total) * 100)
+    };
+  };
+
+  const extractCriticalIssues = (tweets: string[]) => {
+    const negativeKeywords = ['bad', 'terrible', 'worst', 'horrible', 'awful', 'disappointing', 'frustrated', 'angry', 'issue', 'problem'];
+    return tweets
+      .filter(tweet => negativeKeywords.some(kw => tweet.toLowerCase().includes(kw)))
+      .slice(0, 5);
+  };
+
+  const extractMomentsOfDelight = (tweets: string[]) => {
+    const positiveKeywords = ['great', 'excellent', 'amazing', 'love', 'best', 'awesome', 'fantastic', 'wonderful', 'perfect', 'impressed'];
+    return tweets
+      .filter(tweet => positiveKeywords.some(kw => tweet.toLowerCase().includes(kw)))
+      .slice(0, 5);
   };
 
   // Auto-trigger insights when topic changes
@@ -100,25 +143,10 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
       "flex flex-col bg-black/40 backdrop-blur-lg border border-[#E20074]/30 rounded-xl overflow-hidden transition-all duration-300",
       className
     )}>
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-[#E20074]/20">
-        <div className="flex items-center gap-2">
-          <span className="text-xl">📊</span>
-          <div className="flex flex-col">
-            <h3 className="text-sm font-light tracking-wide text-white/90 lowercase">
-              customer happiness index
-            </h3>
-            {insightData?.location && (
-              <p className="text-xs text-white/50 font-light">{insightData.location}</p>
-            )}
-          </div>
-        </div>
-      </div>
-
       {/* Content */}
       <div className="p-4 overflow-y-auto max-h-[500px] no-scrollbar">
         {!topic && !hoveredTweets && (
-          <p className="text-sm text-white/50 font-light">
+          <p className="text-sm text-white/50 font-light text-center py-8">
             select a topic or hover over a location to analyze customer happiness
           </p>
         )}
@@ -140,25 +168,166 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
 
         {insightData && !isLoading && (
           <div className="space-y-4">
-            {/* Insight Content */}
-            <div className="prose prose-sm max-w-none">
-              <p className="text-sm text-white/80 font-light leading-relaxed whitespace-pre-wrap">
-                {insightData.insight}
-              </p>
-            </div>
+            {/* Happiness Score Card */}
+            <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-white/20">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-light text-white/90 flex items-center gap-2">
+                  <span className="text-lg">😊</span>
+                  <span>Happiness Score</span>
+                  {insightData?.location && (
+                    <span className="text-xs text-white/50 ml-auto">{insightData.location}</span>
+                  )}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {/* Score Display */}
+                <div className="flex items-center justify-center">
+                  <div className="relative w-32 h-32">
+                    {/* SVG Pie Chart */}
+                    <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                      {/* Background circle */}
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="rgba(255,255,255,0.1)"
+                        strokeWidth="10"
+                      />
+                      
+                      {/* Positive segment */}
+                      {insightData.sentiment && insightData.sentiment.positive > 0 && (
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          fill="none"
+                          stroke="#10b981"
+                          strokeWidth="10"
+                          strokeDasharray={`${(insightData.sentiment.positive / 100) * 283} 283`}
+                          className="cursor-pointer transition-all duration-300 hover:stroke-width-[12] hover:opacity-80"
+                          onClick={() => setSelectedSegment('positive')}
+                        />
+                      )}
+                      
+                      {/* Neutral segment */}
+                      {insightData.sentiment && insightData.sentiment.neutral > 0 && (
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          fill="none"
+                          stroke="#6b7280"
+                          strokeWidth="10"
+                          strokeDasharray={`${(insightData.sentiment.neutral / 100) * 283} 283`}
+                          strokeDashoffset={`-${(insightData.sentiment.positive / 100) * 283}`}
+                          className="transition-all duration-300"
+                        />
+                      )}
+                      
+                      {/* Negative segment */}
+                      {insightData.sentiment && insightData.sentiment.negative > 0 && (
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          fill="none"
+                          stroke="#ef4444"
+                          strokeWidth="10"
+                          strokeDasharray={`${(insightData.sentiment.negative / 100) * 283} 283`}
+                          strokeDashoffset={`-${((insightData.sentiment.positive + insightData.sentiment.neutral) / 100) * 283}`}
+                          className="cursor-pointer transition-all duration-300 hover:stroke-width-[12] hover:opacity-80"
+                          onClick={() => setSelectedSegment('negative')}
+                        />
+                      )}
+                    </svg>
+                    
+                    {/* Center score */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-white">
+                          {insightData.sentiment?.positive || 0}%
+                        </div>
+                        <div className="text-[10px] text-white/50 uppercase tracking-wide">happy</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            {/* Metadata */}
-            <div className="flex flex-wrap gap-2 pt-3 border-t border-white/10">
-              <span className="px-2 py-1 bg-[#E20074]/20 border border-[#E20074]/30 rounded-md text-xs text-white/70 font-light">
-                {insightData.tweetCount} customers analyzed
-              </span>
-              <span className="px-2 py-1 bg-purple-500/20 border border-purple-500/30 rounded-md text-xs text-white/70 font-light">
-                {insightData.model.includes('gemini') ? '✨ AI' : '🚀 AI'}
-              </span>
-              <span className="px-2 py-1 bg-blue-500/20 border border-blue-500/30 rounded-md text-xs text-white/70 font-light">
-                real-time
-              </span>
-            </div>
+                {/* Legend */}
+                <div className="flex justify-center gap-4 text-xs">
+                  <button
+                    onClick={() => setSelectedSegment('positive')}
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/10 transition-colors"
+                  >
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span className="text-white/70">{insightData.sentiment?.positive || 0}%</span>
+                  </button>
+                  <div className="flex items-center gap-1.5 px-2 py-1">
+                    <div className="w-3 h-3 rounded-full bg-gray-500"></div>
+                    <span className="text-white/70">{insightData.sentiment?.neutral || 0}%</span>
+                  </div>
+                  <button
+                    onClick={() => setSelectedSegment('negative')}
+                    className="flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/10 transition-colors"
+                  >
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <span className="text-white/70">{insightData.sentiment?.negative || 0}%</span>
+                  </button>
+                </div>
+
+                {/* Metadata */}
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-white/10">
+                  <span className="px-2 py-1 bg-[#E20074]/20 border border-[#E20074]/30 rounded-md text-xs text-white/70 font-light">
+                    {insightData.tweetCount} analyzed
+                  </span>
+                  <span className="px-2 py-1 bg-blue-500/20 border border-blue-500/30 rounded-md text-xs text-white/70 font-light">
+                    real-time
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Critical Issues / Moments of Delight */}
+            {selectedSegment === 'negative' && insightData.criticalIssues && insightData.criticalIssues.length > 0 && (
+              <Card className="bg-red-500/10 border-red-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-light text-red-300 flex items-center gap-2">
+                    <span className="text-lg">⚠️</span>
+                    <span>Critical Issues</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {insightData.criticalIssues.map((issue, idx) => (
+                      <div key={idx} className="p-2 bg-black/30 rounded-lg border border-red-500/20">
+                        <p className="text-xs text-white/80 leading-relaxed">{issue}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {selectedSegment === 'positive' && insightData.momentsOfDelight && insightData.momentsOfDelight.length > 0 && (
+              <Card className="bg-green-500/10 border-green-500/30">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-light text-green-300 flex items-center gap-2">
+                    <span className="text-lg">✨</span>
+                    <span>Moments of Delight</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {insightData.momentsOfDelight.map((moment, idx) => (
+                      <div key={idx} className="p-2 bg-black/30 rounded-lg border border-green-500/20">
+                        <p className="text-xs text-white/80 leading-relaxed">{moment}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         )}
       </div>
