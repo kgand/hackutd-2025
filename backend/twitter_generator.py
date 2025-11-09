@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import List, Dict, Optional, Any
 from datetime import datetime, timedelta
 from apify_client import ApifyClient
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,6 +14,7 @@ load_dotenv()
 CACHE_DIR = Path("cache")
 APIFY_TOKEN = os.getenv("apify_token")
 APIFY_ACTOR = os.getenv("apify_actor", "apify/twitter-scraper")
+PYTHON_API_URL = "http://localhost:5000/extract-location"
 
 # Ensure cache directory exists
 CACHE_DIR.mkdir(exist_ok=True)
@@ -112,6 +114,33 @@ class TwitterScraper:
                 results.extend(self.find_location_fields(item, new_path))
 
         return results
+
+    def extract_location_via_api(
+        self,
+        tweet_text: str,
+        location_fields: List[tuple]
+    ) -> Optional[Dict[str, Any]]:
+        """Extract location from tweet using external API"""
+        location_values = [str(value) for path, value in location_fields if value]
+        location_context = ", ".join(location_values) if location_values else ""
+
+        payload = {
+            "tweet_text": tweet_text,
+            "location_context": location_context
+        }
+
+        try:
+            response = requests.post(
+                PYTHON_API_URL,
+                json=payload,
+                timeout=30
+            )
+            response.raise_for_status()
+            return response.json()
+
+        except requests.exceptions.RequestException as e:
+            print(f"[TwitterScraper] Location extraction API error: {e}")
+            return None
 
 
 if __name__ == "__main__":
