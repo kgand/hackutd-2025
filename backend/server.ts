@@ -562,7 +562,82 @@ app.get("/api/downdetector", async (_req: Request, res: Response) => {
   }
 });
 
+async function init() {
+    try {
+        console.log('\n' + '='.repeat(70));
+        console.log('T-MOBILE CUSTOMER HAPPINESS INDEX - BACKEND');
+        console.log('='.repeat(70));
+
+        const cachedTrends = getCachedData('trends_us');
+
+        if (cachedTrends && Array.isArray(cachedTrends) && cachedTrends.length > 0) {
+            console.log('\nCACHE MODE: Using pre-generated data');
+            console.log('='.repeat(70));
+            console.log(`Topics loaded: ${cachedTrends.length}`);
+
+            let totalTweets = 0;
+            let topicsWithData = 0;
+            for (const topic of cachedTrends) {
+                const tweets = getCachedData(`tweets_${topic}`);
+                if (tweets && Array.isArray(tweets)) {
+                    totalTweets += tweets.length;
+                    topicsWithData++;
+                }
+            }
+            console.log(`Topics with tweet data: ${topicsWithData}`);
+            console.log(`Total cached tweets: ${totalTweets}`);
+
+            const downdetector = getCachedData('downdetector');
+            if (downdetector) {
+                console.log(`DownDetector data: available`);
+            }
+
+            const sentiment = getCachedData('tmobile_sentiment_data');
+            if (sentiment) {
+                console.log(`Sentiment data: available`);
+            }
+
+            console.log('\nBackend ready!');
+            console.log('To refresh data: npm run scrape:force');
+            console.log('='.repeat(70) + '\n');
+            return;
+        }
+
+        console.log('\nWARNING: NO CACHE FOUND - LIVE MODE');
+        console.log('='.repeat(70));
+        console.log('Cache directory is empty or incomplete.');
+        console.log('\nTo generate cache data, run:');
+        console.log('  npm run scrape          (checks cache first)');
+        console.log('  npm run scrape:force    (force refresh)');
+        console.log('  npm run scrape:light    (quick test with 20 tweets)');
+        console.log('\nAttempting to connect to database for live mode...');
+
+        supabase = await connectSupabase();
+        console.log("Connected to Supabase database");
+        console.log('\nLIVE MODE: Will scrape fresh data when requested');
+        console.log('Note: Requires Apify token and Python location API running');
+        console.log('='.repeat(70) + '\n');
+
+    } catch (err) {
+        console.error('\nERROR: Initialization error:', err);
+        console.error('\nTo run in cache mode:');
+        console.error('  1. Run: npm run scrape');
+        console.error('  2. Restart server: npm run dev');
+        console.error('\nOr configure Supabase credentials in .env file');
+        process.exit(1);
+    }
+}
+
 const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`\nServer running on http://localhost:${PORT}`);
+    console.log('   Press Ctrl+C to stop\n');
+    init().catch(err => {
+        console.error('\nERROR: Fatal initialization error:', err);
+        process.exit(1);
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
