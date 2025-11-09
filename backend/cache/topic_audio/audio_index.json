@@ -1,0 +1,82 @@
+{
+  "T-Mobile 5G": [
+    {
+      "variant": 5,
+      "filename": "5G_variant5.mp3",
+      "path": "cache/topic_audio/5G_variant5.mp3",
+      "size_kb": 441.27
+    }
+  ],
+  "T-Mobile Customer Service": [
+    {
+      "variant": 5,
+      "filename": "Customer_Service_variant5.mp3",
+      "path": "cache/topic_audio/Customer_Service_variant5.mp3",
+      "size_kb": 462.9
+    }
+  ],
+  "T-Mobile Deals": [
+    {
+      "variant": 5,
+      "filename": "Deals_variant5.mp3",
+      "path": "cache/topic_audio/Deals_variant5.mp3",
+      "size_kb": 467.39
+    }
+  ],
+  "T-Mobile Home Internet": [
+    {
+      "variant": 5,
+      "filename": "Home_Internet_variant5.mp3",
+      "path": "cache/topic_audio/Home_Internet_variant5.mp3",
+      "size_kb": 479.64
+    }
+  ],
+  "T-Mobile Magenta Monday": [
+    {
+      "variant": 5,
+      "filename": "Magenta_Monday_variant5.mp3",
+      "path": "cache/topic_audio/Magenta_Monday_variant5.mp3",
+      "size_kb": 493.51
+    }
+  ],
+  "T-Mobile Network": [
+    {
+      "variant": 5,
+      "filename": "Network_variant5.mp3",
+      "path": "cache/topic_audio/Network_variant5.mp3",
+      "size_kb": 478.82
+    }
+  ],
+  "T-Mobile Promotions": [
+    {
+      "variant": 4,
+      "filename": "Promotions_variant4.mp3",
+      "path": "cache/topic_audio/Promotions_variant4.mp3",
+      "size_kb": 526.17
+    }
+  ],
+  "T-Mobile Trade-In": [
+    {
+      "variant": 5,
+      "filename": "Trade-In_variant5.mp3",
+      "path": "cache/topic_audio/Trade-In_variant5.mp3",
+      "size_kb": 458.41
+    }
+  ],
+  "T-Mobile Tuesdays": [
+    {
+      "variant": 5,
+      "filename": "Tuesdays_variant5.mp3",
+      "path": "cache/topic_audio/Tuesdays_variant5.mp3",
+      "size_kb": 456.37
+    }
+  ],
+  "T-Mobile Upgrade": [
+    {
+      "variant": 3,
+      "filename": "Upgrade_variant3.mp3",
+      "path": "cache/topic_audio/Upgrade_variant3.mp3",
+      "size_kb": 474.33
+    }
+  ]
+}

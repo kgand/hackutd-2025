@@ -1027,14 +1027,23 @@ async function generateContextualInsight(context: string, tweetTexts: string[], 
       // If no exact match, try fuzzy matching
       if (!cachedInsight) {
         const contextLower = context.toLowerCase();
-        const matchedTopic = Object.keys(cacheData).find(topic => {
-          const topicLower = topic.toLowerCase();
-          return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
-        });
         
-        if (matchedTopic) {
-          cachedInsight = cacheData[matchedTopic];
-          console.log(`Fuzzy matched "${context}" to cached topic "${matchedTopic}" (fallback)`);
+        // Check for "all topics" variations
+        if (contextLower === 'customer feedback' || contextLower === 'all' || contextLower === '') {
+          cachedInsight = cacheData['All Topics'];
+          if (cachedInsight) {
+            console.log(`Matched "${context}" to "All Topics" (fallback)`);
+          }
+        } else {
+          const matchedTopic = Object.keys(cacheData).find(topic => {
+            const topicLower = topic.toLowerCase();
+            return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
+          });
+          
+          if (matchedTopic) {
+            cachedInsight = cacheData[matchedTopic];
+            console.log(`Fuzzy matched "${context}" to cached topic "${matchedTopic}" (fallback)`);
+          }
         }
       }
       
@@ -1090,6 +1099,35 @@ ${cached.locationInsights}
 *Note: This analysis is based on pre-analyzed historical data${context ? ` for ${context}` : ''}. For real-time AI analysis, configure Gemini or OpenRouter API keys in your environment.*`;
 }
 
+
+function getRandomAudioFile(topic: string): string | null {
+    try {
+        const audioDir = path.join(CACHE_DIR, 'topic_audio');
+        const audioIndexFile = path.join(audioDir, 'audio_index.json');
+        
+        if (!fs.existsSync(audioIndexFile)) {
+            console.log(`No audio index found`);
+            return null;
+        }
+
+        const audioIndex = JSON.parse(fs.readFileSync(audioIndexFile, 'utf-8'));
+        
+        if (audioIndex[topic] && Array.isArray(audioIndex[topic]) && audioIndex[topic].length > 0) {
+            // Randomly select one of the available audio files
+            const randomIndex = Math.floor(Math.random() * audioIndex[topic].length);
+            const audioFile = audioIndex[topic][randomIndex];
+            console.log(`Selected audio variant ${audioFile.variant} for topic: ${topic}`);
+            return audioFile.filename;
+        }
+        
+        console.log(`No audio files found for topic: ${topic}`);
+        return null;
+    } catch (error) {
+        console.error(`Error reading audio files for ${topic}:`, error);
+        return null;
+    }
+}
+
 app.get("/api/summary/:topic", async (req: Request, res: Response) => {
   try {
     const topic = decodeURIComponent(req.params.topic);
@@ -1109,12 +1147,18 @@ app.get("/api/insights/:topic", async (req: Request, res: Response) => {
     const result = await generateAgenticInsight(topic);
 
     if (result.success) {
+      // Check if audio file exists for this topic
+      const audioFilename = getRandomAudioFile(topic);
+      const audioUrl = audioFilename ? `/api/audio/${encodeURIComponent(topic)}` : null;
+      
       res.json({
         topic,
         insight: result.insight,
         model: result.model,
         tweetCount: result.tweetCount,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        audioUrl: audioUrl,
+        hasAudio: !!audioFilename
       });
     } else {
       res.status(500).json({
@@ -1160,6 +1204,82 @@ app.post("/api/insights/analyze", async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Error generating contextual insights:", err);
     res.status(500).json({ error: "Failed to generate insights" });
+  }
+});
+
+
+// Endpoint to get audio file for a topic
+app.get("/api/audio/:topic", async (req: Request, res: Response) => {
+  try {
+    const topic = decodeURIComponent(req.params.topic);
+    console.log(`Audio request for topic: ${topic}`);
+
+    const audioFilename = getRandomAudioFile(topic);
+    
+    if (!audioFilename) {
+      return res.status(404).json({ 
+        error: "No audio file available for this topic",
+        topic: topic,
+        suggestion: "Run 'python generate_topic_audio.py' to generate audio files"
+      });
+    }
+
+    const audioPath = path.join(CACHE_DIR, 'topic_audio', audioFilename);
+    
+    if (!fs.existsSync(audioPath)) {
+      return res.status(404).json({ 
+        error: "Audio file not found",
+        filename: audioFilename
+      });
+    }
+
+    // Set appropriate headers for audio streaming
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Disposition', `inline; filename="${audioFilename}"`);
+    
+    // Stream the audio file
+    const audioStream = fs.createReadStream(audioPath);
+    audioStream.pipe(res);
+    
+  } catch (err) {
+    console.error("Error serving audio file:", err);
+    res.status(500).json({ error: "Failed to serve audio file" });
+  }
+});
+
+
+// Endpoint to get audio metadata for a topic
+app.get("/api/audio/:topic/info", async (req: Request, res: Response) => {
+  try {
+    const topic = decodeURIComponent(req.params.topic);
+    const audioDir = path.join(CACHE_DIR, 'topic_audio');
+    const audioIndexFile = path.join(audioDir, 'audio_index.json');
+    
+    if (!fs.existsSync(audioIndexFile)) {
+      return res.status(404).json({ 
+        error: "Audio index not found",
+        suggestion: "Run 'python generate_topic_audio.py' to generate audio files"
+      });
+    }
+
+    const audioIndex = JSON.parse(fs.readFileSync(audioIndexFile, 'utf-8'));
+    
+    if (audioIndex[topic]) {
+      res.json({
+        topic: topic,
+        variants: audioIndex[topic],
+        count: audioIndex[topic].length
+      });
+    } else {
+      res.status(404).json({ 
+        error: "No audio files available for this topic",
+        topic: topic,
+        availableTopics: Object.keys(audioIndex)
+      });
+    }
+  } catch (err) {
+    console.error("Error fetching audio info:", err);
+    res.status(500).json({ error: "Failed to fetch audio info" });
   }
 });
 

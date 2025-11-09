@@ -160,14 +160,23 @@ export const api = {
         // If no exact match, try fuzzy matching
         if (!cachedInsight) {
           const contextLower = context.toLowerCase();
-          const matchedTopic = Object.keys(allInsights).find(topic => {
-            const topicLower = topic.toLowerCase();
-            return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
-          });
           
-          if (matchedTopic) {
-            cachedInsight = allInsights[matchedTopic];
-            console.log(`Fuzzy matched "${context}" to "${matchedTopic}"`);
+          // Check for "all topics" variations
+          if (contextLower === 'customer feedback' || contextLower === 'all' || contextLower === '') {
+            cachedInsight = allInsights['All Topics'];
+            if (cachedInsight) {
+              console.log(`Matched "${context}" to "All Topics"`);
+            }
+          } else {
+            const matchedTopic = Object.keys(allInsights).find(topic => {
+              const topicLower = topic.toLowerCase();
+              return topicLower.includes(contextLower) || contextLower.includes(topicLower.replace('t-mobile ', ''));
+            });
+            
+            if (matchedTopic) {
+              cachedInsight = allInsights[matchedTopic];
+              console.log(`Fuzzy matched "${context}" to "${matchedTopic}"`);
+            }
           }
         }
         

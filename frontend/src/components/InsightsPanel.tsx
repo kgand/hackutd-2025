@@ -32,6 +32,50 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
   const [error, setError] = useState<string | null>(null);
   const [lastAnalyzedContext, setLastAnalyzedContext] = useState<string>('');
   const [selectedSegment, setSelectedSegment] = useState<'positive' | 'negative' | null>(null);
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+
+  // Play random topic audio when topic changes
+  React.useEffect(() => {
+    if (topic && topic !== 'Customer Feedback') {
+      playTopicAudio(topic);
+    }
+  }, [topic]);
+
+  const playTopicAudio = async (topicName: string) => {
+    try {
+      // Stop any currently playing audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_BASE_URL}/api/audio/${encodeURIComponent(topicName)}`);
+      
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        
+        const audio = new Audio(audioUrl);
+        audioRef.current = audio;
+        
+        audio.onended = () => {
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        audio.onerror = () => {
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        await audio.play();
+        console.log(`Playing audio for topic: ${topicName}`);
+      } else {
+        console.log(`No audio available for topic: ${topicName}`);
+      }
+    } catch (err) {
+      console.log(`Could not play audio for topic: ${topicName}`, err);
+    }
+  };
 
   const analyzeContext = async (context: string, tweets: string[], location?: string) => {
     setIsLoading(true);
@@ -100,17 +144,20 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
 
   // Auto-trigger insights when topic changes
   useEffect(() => {
-    if (topic && currentData.length > 0) {
+    if (currentData.length > 0) {
       const tweetTexts = currentData
         .filter(d => d.text && d.text.trim().length > 0)
         .map(d => d.text)
         .slice(0, 50); // Limit to 50 tweets for performance
 
       if (tweetTexts.length > 0) {
-        const contextKey = `topic_${topic}`;
+        // Use "All Topics" when no specific topic is selected
+        const contextKey = topic ? `topic_${topic}` : 'topic_All Topics';
+        const analysisContext = topic || 'All Topics';
+        
         if (contextKey !== lastAnalyzedContext) {
-          console.log(`Auto-generating insights for topic: ${topic} (${tweetTexts.length} tweets)`);
-          analyzeContext(topic, tweetTexts);
+          console.log(`Auto-generating insights for topic: ${analysisContext} (${tweetTexts.length} tweets)`);
+          analyzeContext(analysisContext, tweetTexts);
         }
       }
     }
@@ -138,14 +185,24 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
     }
   }, [hoveredTweets, topic]);
 
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
   return (
     <div className={cn(
       "flex flex-col bg-black/40 backdrop-blur-lg border border-[#E20074]/30 rounded-xl overflow-hidden transition-all duration-300",
       className
     )}>
       {/* Content */}
-      <div className="p-4 overflow-y-auto max-h-[500px] no-scrollbar">
-        {!topic && !hoveredTweets && (
+      <div className="p-4 overflow-y-auto overflow-x-hidden max-h-[500px] no-scrollbar">
+        {!hoveredTweets && currentData.length === 0 && (
           <p className="text-sm text-white/50 font-light text-center py-8">
             select a topic or hover over a location to analyze customer happiness
           </p>
@@ -170,16 +227,14 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
           <div className="space-y-4">
             {/* Happiness Score Card */}
             <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-white/20">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-light text-white/90 flex items-center gap-2">
-                  <span className="text-lg">😊</span>
-                  <span>Happiness Score</span>
-                  {insightData?.location && (
-                    <span className="text-xs text-white/50 ml-auto">{insightData.location}</span>
-                  )}
-                </CardTitle>
+              <CardHeader className="pb-2">
+                {insightData?.location && (
+                  <CardTitle className="text-xs text-white/50 font-light">
+                    {insightData.location}
+                  </CardTitle>
+                )}
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 pt-0">
                 {/* Score Display */}
                 <div className="flex items-center justify-center">
                   <div className="relative w-32 h-32">
@@ -246,9 +301,9 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-white">
-                          {insightData.sentiment?.positive || 0}%
+                          {((insightData.sentiment?.positive || 0) + (insightData.sentiment?.neutral || 0))}%
                         </div>
-                        <div className="text-[10px] text-white/50 uppercase tracking-wide">happy</div>
+                        <div className="text-[10px] text-white/50 uppercase tracking-wide">satisfaction</div>
                       </div>
                     </div>
                   </div>

@@ -1,9 +1,42 @@
 {
-  "T-Mobile 5G": {
-    "happinessScore": 82,
+  "All Topics": {
+    "happinessScore": 72,
     "sentiment": {
-      "positive": 75,
-      "negative": 15,
+      "positive": 68,
+      "negative": 22,
+      "neutral": 10
+    },
+    "criticalIssues": [
+      "Billing transparency issues causing customer confusion and dispute escalations",
+      "Network coverage gaps in rural areas affecting customer satisfaction",
+      "Customer support wait times during peak periods creating frustration"
+    ],
+    "momentsOfDelight": [
+      "Competitive pricing and promotional offers exceeding customer expectations",
+      "T-Mobile Tuesdays rewards program building strong customer loyalty",
+      "5G network performance in major metros delivering exceptional speeds",
+      "International roaming benefits providing seamless travel experiences"
+    ],
+    "earlyWarningSignals": [
+      "Billing disputes trending as primary churn driver - needs immediate attention",
+      "Coverage comparison posts with competitors increasing on social media",
+      "App stability issues impacting customer self-service adoption"
+    ],
+    "actionableRecommendations": [
+      "Prioritize billing system transparency improvements and automated dispute resolution",
+      "Accelerate rural network expansion in high-value corridors",
+      "Implement proactive customer communication for service improvements",
+      "Enhance mobile app stability and performance across all device types",
+      "Standardize customer service quality across all channels and locations"
+    ],
+    "locationInsights": "Overall sentiment varies by region: Strong performance in urban metros and competitive markets. Rural and suburban areas show mixed satisfaction. Highest engagement in tech-forward markets.",
+    "timestamp": "2025-11-09T15:00:00Z"
+  },
+  "T-Mobile 5G": {
+    "happinessScore": 78,
+    "sentiment": {
+      "positive": 72,
+      "negative": 18,
       "neutral": 10
     },
     "criticalIssues": [
@@ -30,10 +63,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Customer Service": {
-    "happinessScore": 78,
+    "happinessScore": 74,
     "sentiment": {
-      "positive": 70,
-      "negative": 20,
+      "positive": 67,
+      "negative": 23,
       "neutral": 10
     },
     "criticalIssues": [
@@ -59,10 +92,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Network": {
-    "happinessScore": 76,
+    "happinessScore": 71,
     "sentiment": {
-      "positive": 68,
-      "negative": 22,
+      "positive": 64,
+      "negative": 26,
       "neutral": 10
     },
     "criticalIssues": [
@@ -89,10 +122,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Deals": {
-    "happinessScore": 85,
+    "happinessScore": 79,
     "sentiment": {
-      "positive": 80,
-      "negative": 8,
+      "positive": 74,
+      "negative": 14,
       "neutral": 12
     },
     "criticalIssues": [
@@ -119,11 +152,11 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "Magenta Monday": {
-    "happinessScore": 88,
+    "happinessScore": 80,
     "sentiment": {
-      "positive": 85,
-      "negative": 5,
-      "neutral": 10
+      "positive": 76,
+      "negative": 12,
+      "neutral": 12
     },
     "criticalIssues": [
       "Website crashes during high-traffic deal launches",
@@ -149,10 +182,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Home Internet": {
-    "happinessScore": 81,
+    "happinessScore": 76,
     "sentiment": {
-      "positive": 73,
-      "negative": 15,
+      "positive": 68,
+      "negative": 20,
       "neutral": 12
     },
     "criticalIssues": [
@@ -180,11 +213,11 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Tuesdays": {
-    "happinessScore": 90,
+    "happinessScore": 80,
     "sentiment": {
-      "positive": 87,
-      "negative": 3,
-      "neutral": 10
+      "positive": 76,
+      "negative": 12,
+      "neutral": 12
     },
     "criticalIssues": [
       "App crashes on Tuesday mornings during peak redemption",
@@ -210,10 +243,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Trade-In": {
-    "happinessScore": 79,
+    "happinessScore": 73,
     "sentiment": {
-      "positive": 71,
-      "negative": 18,
+      "positive": 65,
+      "negative": 24,
       "neutral": 11
     },
     "criticalIssues": [
@@ -241,10 +274,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Upgrade": {
-    "happinessScore": 77,
+    "happinessScore": 72,
     "sentiment": {
-      "positive": 69,
-      "negative": 19,
+      "positive": 64,
+      "negative": 24,
       "neutral": 12
     },
     "criticalIssues": [
@@ -273,10 +306,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Coverage": {
-    "happinessScore": 74,
+    "happinessScore": 69,
     "sentiment": {
-      "positive": 65,
-      "negative": 25,
+      "positive": 61,
+      "negative": 29,
       "neutral": 10
     },
     "criticalIssues": [
@@ -305,10 +338,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Billing": {
-    "happinessScore": 72,
+    "happinessScore": 67,
     "sentiment": {
-      "positive": 62,
-      "negative": 28,
+      "positive": 58,
+      "negative": 32,
       "neutral": 10
     },
     "criticalIssues": [
@@ -338,10 +371,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Store": {
-    "happinessScore": 80,
+    "happinessScore": 75,
     "sentiment": {
-      "positive": 74,
-      "negative": 14,
+      "positive": 68,
+      "negative": 20,
       "neutral": 12
     },
     "criticalIssues": [
@@ -371,10 +404,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Plans": {
-    "happinessScore": 83,
+    "happinessScore": 77,
     "sentiment": {
-      "positive": 77,
-      "negative": 11,
+      "positive": 71,
+      "negative": 17,
       "neutral": 12
     },
     "criticalIssues": [
@@ -402,10 +435,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Prepaid": {
-    "happinessScore": 75,
+    "happinessScore": 70,
     "sentiment": {
-      "positive": 67,
-      "negative": 21,
+      "positive": 62,
+      "negative": 26,
       "neutral": 12
     },
     "criticalIssues": [
@@ -435,10 +468,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Business": {
-    "happinessScore": 78,
+    "happinessScore": 73,
     "sentiment": {
-      "positive": 71,
-      "negative": 17,
+      "positive": 66,
+      "negative": 22,
       "neutral": 12
     },
     "criticalIssues": [
@@ -468,11 +501,11 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Roaming": {
-    "happinessScore": 84,
+    "happinessScore": 78,
     "sentiment": {
-      "positive": 79,
-      "negative": 10,
-      "neutral": 11
+      "positive": 73,
+      "negative": 15,
+      "neutral": 12
     },
     "criticalIssues": [
       "Unexpected roaming charges in border areas (Canada/Mexico)",
@@ -498,10 +531,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile App": {
-    "happinessScore": 76,
+    "happinessScore": 71,
     "sentiment": {
-      "positive": 68,
-      "negative": 19,
+      "positive": 63,
+      "negative": 24,
       "neutral": 13
     },
     "criticalIssues": [
@@ -531,10 +564,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Support": {
-    "happinessScore": 77,
+    "happinessScore": 72,
     "sentiment": {
-      "positive": 69,
-      "negative": 20,
+      "positive": 64,
+      "negative": 25,
       "neutral": 11
     },
     "criticalIssues": [
@@ -564,10 +597,10 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Promotions": {
-    "happinessScore": 86,
+    "happinessScore": 79,
     "sentiment": {
-      "positive": 81,
-      "negative": 7,
+      "positive": 75,
+      "negative": 13,
       "neutral": 12
     },
     "criticalIssues": [
@@ -595,11 +628,11 @@
     "timestamp": "2025-11-09T15:00:00Z"
   },
   "T-Mobile Family Plan": {
-    "happinessScore": 87,
+    "happinessScore": 80,
     "sentiment": {
-      "positive": 83,
-      "negative": 6,
-      "neutral": 11
+      "positive": 77,
+      "negative": 11,
+      "neutral": 12
     },
     "criticalIssues": [
       "Managing multiple lines complicated for non-tech-savvy account holders",

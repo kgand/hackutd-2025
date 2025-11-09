@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import * as d3 from "d3";
 import GlassCard from "../components/graph/GlassCard";
 import ForceGraph, { type NodeDatum, type LinkDatum } from "../components/graph/ForceGraph";
@@ -21,6 +21,54 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
     const [error, setError] = useState<string | null>(null);
   const [focusedNode, setFocusedNode] = useState<NodeDatum | null>(null);
   const [selectedClusterId, setSelectedClusterId] = useState<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Function to play topic audio
+  const playTopicAudio = async (topicName: string) => {
+    try {
+      // Stop any currently playing audio
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${API_BASE_URL}/api/audio/${encodeURIComponent(topicName)}`);
+      
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        
+        const audio = new Audio(audioUrl);
+        audioRef.current = audio;
+        
+        audio.onended = () => {
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        audio.onerror = () => {
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        await audio.play();
+        console.log(`Playing audio for topic: ${topicName}`);
+      } else {
+        console.log(`No audio available for topic: ${topicName}`);
+      }
+    } catch (err) {
+      console.log(`Could not play audio for topic: ${topicName}`, err);
+    }
+  };
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
     useEffect(() => {
       let cancelled = false;
@@ -255,6 +303,10 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                   setFocusedNode(node);
                   if (node.type === "cluster" && node.cluster_id != null) {
                     setSelectedClusterId(node.cluster_id);
+                    // Play audio for the selected topic
+                    if (node.title) {
+                      playTopicAudio(node.title);
+                    }
                   }
                 }}
                 showLabels={true}
@@ -291,7 +343,7 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
         </div>
 
         {/* Right Sidebar - Details */}
-        <GlassCard className="w-[min(36vw,500px)] min-h-0 overflow-hidden flex flex-col">
+        <GlassCard className="w-[min(22vw,300px)] min-h-0 overflow-hidden flex flex-col">
           <div className="p-4 space-y-4 h-full overflow-auto no-scrollbar">
             {!focusedNode ? (
               <div className="text-purple-200/60 text-center font-light lowercase tracking-wide py-8">
