@@ -166,6 +166,74 @@ app.get("/api/trends", async (_req: Request, res: Response) => {
   }
 });
 
+app.get("/api/flattened", async (_req: Request, res: Response) => {
+  try {
+    const cachedTrends = getCachedData('trends_us');
+    if (cachedTrends && Array.isArray(cachedTrends)) {
+      let allTweets: any[] = [];
+
+      for (const topic of cachedTrends) {
+        const cacheKey = `tweets_${topic}`;
+        const cachedTopicTweets = getCachedData(cacheKey);
+
+        if (cachedTopicTweets && Array.isArray(cachedTopicTweets)) {
+          const mapped = cachedTopicTweets.map((tweet: any) => {
+            const lat = tweet.location?.coordinates?.[1] ?? 0;
+            const lon = tweet.location?.coordinates?.[0] ?? 0;
+            const text = tweet.text ?? "";
+            const author = tweet.author?.userName ?? tweet.author?.name ?? "unknown";
+            const location = tweet.location ?? "";
+
+            return { topic, lon, lat, text, author, location };
+          });
+          allTweets = allTweets.concat(mapped);
+        }
+      }
+
+      const filtered = allTweets.filter(item => {
+        return typeof item.lat === 'number' && typeof item.lon === 'number' &&
+               !isNaN(item.lat) && !isNaN(item.lon) &&
+               item.lat !== 0 && item.lon !== 0 &&
+               Math.abs(item.lat) <= 90 && Math.abs(item.lon) <= 180;
+      });
+
+      console.log(`All topics: Serving ${filtered.length} tweets from cache`);
+      return res.json(filtered);
+    }
+
+    if (!supabase) return res.status(500).json({ error: "Database not connected"});
+
+    const { data: rows, error } = await supabase
+      .from('tweets')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    const mapped = (rows || []).map((r: any) => {
+      const lat = r.latitude ?? 0;
+      const lon = r.longitude ?? 0;
+      const text = r.content ?? "";
+      const author = r.username ?? "unknown";
+      const topic = r.topic ?? "";
+      const location = r.location ?? "";
+
+      return { topic, lon, lat, text, author, location };
+    }).filter(item => {
+      return typeof item.lat === 'number' && typeof item.lon === 'number' &&
+             !isNaN(item.lat) && !isNaN(item.lon) &&
+             item.lat !== 0 && item.lon !== 0 &&
+             Math.abs(item.lat) <= 90 && Math.abs(item.lon) <= 180;
+    });
+
+    console.log(`All topics: Found ${rows?.length || 0} total tweets, ${mapped.length} with valid coordinates`);
+    res.json(mapped);
+  } catch (err) {
+    console.error("/api/flattened error:", err);
+    res.status(500).json({ error: "Failed to fetch all tweets" });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
