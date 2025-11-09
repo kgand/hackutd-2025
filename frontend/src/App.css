@@ -1,0 +1,178 @@
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  text-transform: lowercase;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* Global font family */
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+/* Text elements */
+p, span, div, label, input, textarea, button {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+.galaxy-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.galaxy-scene-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 2;
+  pointer-events: none;
+  padding-bottom: calc(35vh - 50px);
+  box-sizing: border-box;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto; 
+  position: relative;
+}
+
+.search-bar-wrapper {
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  width: 90%;
+  pointer-events: auto; 
+}
+
+.title {
+  font-size: 6.9rem;
+  color: white;
+  text-align: center;
+  margin-bottom: 0; 
+  line-height: 1; 
+  font-weight: 100;
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
+}
+
+.subhead {
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-align: center;
+  max-width: 40ch; 
+  margin-bottom: 2.5rem; 
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    justify-content: center;
+    padding-top: 15vh; 
+  }
+
+  .title {
+    font-size: 4rem;
+  }
+
+  .subhead {
+    font-size: 1rem;
+    max-width: 30ch;
+  }
+}
+
+/* Glass morphism elements */
+.bg-black\/30,
+.backdrop-blur-lg,
+[class*="glass"],
+[class*="card"],
+[class*="panel"],
+[class*="sidebar"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* Text color utilities */
+.text-white,
+.text-white\/90,
+.text-white\/80,
+.text-white\/60,
+.text-blue-400,
+.text-gray-400 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Buttons */
+button {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* Inputs */
+input, textarea {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* Loading dots animation */
+.loading-dots::after {
+  content: '.';
+  animation: loading-dots 1.4s infinite;
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+}
+
+@keyframes loading-dots {
+  0%, 20% {
+    content: '.';
+  }
+  40% {
+    content: '..';
+  }
+  60% {
+    content: '...';
+  }
+  80% {
+    content: '..';
+  }
+  100% {
+    content: '.';
+  }
+}
