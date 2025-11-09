@@ -81,6 +81,38 @@ class TwitterScraper:
             print(f"[TwitterScraper] Error during scraping: {e}")
             raise
 
+    def extract_tweet_text(self, tweet: Dict[str, Any]) -> str:
+        """Extract text from tweet object"""
+        return tweet.get("text") or tweet.get("full_text") or tweet.get("content") or ""
+
+    def find_location_fields(self, obj: Any, path: str = "") -> List[tuple]:
+        """Recursively find location-related fields in tweet data"""
+        location_keywords = {
+            'location', 'place', 'city', 'state', 'country', 'address',
+            'geo', 'coordinates', 'lat', 'lon', 'latitude', 'longitude',
+            'zip', 'zipcode', 'postalcode', 'countrycode', 'region'
+        }
+
+        results = []
+
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                new_path = f"{path}.{key}" if path else key
+
+                # Check if this key is location-related
+                if key.lower() in location_keywords and value:
+                    results.append((new_path, value))
+
+                # Recurse into nested objects
+                results.extend(self.find_location_fields(value, new_path))
+
+        elif isinstance(obj, list):
+            for i, item in enumerate(obj):
+                new_path = f"{path}[{i}]"
+                results.extend(self.find_location_fields(item, new_path))
+
+        return results
+
 
 if __name__ == "__main__":
     print("Twitter Scraper Module")
