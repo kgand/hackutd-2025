@@ -22,6 +22,173 @@ const ACTOR = process.env.apify_actor;
 
 const genAI = new GoogleGenerativeAI(process.env.gemini_api_key || "");
 
+const LOCATION_FIELDS = new Set([
+    'place', 'location', 'city', 'state', 'country',
+    'geo', 'coordinates', 'lat', 'lon', 'latitude', 'longitude',
+    'zip', 'zipcode', 'postalcode', 'countrycode', 'region',
+    'county', 'district', 'neighborhood', 'borough'
+]);
+
+interface LocationField {
+    path: string;
+    value: any;
+}
+
+function findLocationFields(obj: any, currentPath: string = ""): LocationField[] {
+    const results: LocationField[] = [];
+
+    if (typeof obj === 'object' && obj !== null) {
+        if (Array.isArray(obj)) {
+            for (let i = 0; i < obj.length; i++) {
+                const newPath = `${currentPath}[${i}]`;
+                results.push(...findLocationFields(obj[i], newPath));
+            }
+        } else {
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const newPath = currentPath ? `${currentPath}.${key}` : key;
+
+                    if (LOCATION_FIELDS.has(key.toLowerCase())) {
+                        results.push({ path: newPath, value: obj[key] });
+                    }
+
+                    results.push(...findLocationFields(obj[key], newPath));
+                }
+            }
+        }
+    }
+
+    return results;
+}
+
+function extractTweetText(tweet: any): string {
+    const textFields = ['text', 'full_text', 'content', 'body', 'message'];
+
+    for (const field of textFields) {
+        if (tweet[field] && typeof tweet[field] === 'string') {
+            return tweet[field];
+        }
+    }
+
+    try {
+        return JSON.stringify(tweet);
+    } catch (error) {
+        return "Unable to extract text from tweet";
+    }
+}
+
+async function dropTopic(topic: string) {
+    if (!supabase) return;
+    await supabase.from('tweets').delete().eq('topic', topic);
+}
+
+async function sendToPythonAPI(tweet: any, locationData: LocationField[]): Promise<any> {
+    try {
+        const tweetText = extractTweetText(tweet);
+
+        const locationValues = locationData
+            .map(field => field.value)
+            .filter(value => value && typeof value === 'string');
+
+        const requestData = {
+            tweet_text: tweetText,
+            location_context: locationValues.join(', ')
+        };
+
+        const response = await axios.post('http://localhost:5000/extract-location', requestData, {
+            timeout: 30000
+        });
+
+        return response.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            if (error.code === 'ECONNREFUSED') {
+                console.error('WARNING: Python location API not running at http://localhost:5000');
+                console.error('   Start it with: python location.py');
+            } else if (error.code === 'ETIMEDOUT') {
+                console.error('WARNING: Python location API timeout');
+            } else {
+                console.error('WARNING: Python API error:', error.message);
+            }
+        } else {
+            console.error('Error calling Python API:', error);
+        }
+        return null;
+    }
+}
+
+async function processTweets(topic: string, items: any[]) {
+    try {
+        let processedCount = 0;
+        let insertedCount = 0;
+
+        for (const item of items) {
+            const locationFields = findLocationFields(item);
+
+            const tweetText = extractTweetText(item);
+
+            if (!tweetText || tweetText.length < 5) {
+                console.log('Skipping tweet with insufficient text');
+                continue;
+            }
+
+            processedCount++;
+
+            if (processedCount % 10 === 0) {
+                console.log(`Processing tweet ${processedCount}/${items.length}...`);
+            }
+
+            const pythonApiResult = await sendToPythonAPI(item, locationFields);
+
+            if (pythonApiResult && pythonApiResult.coordinates) {
+                const lat = pythonApiResult.coordinates[0];
+                const lon = pythonApiResult.coordinates[1];
+
+                if (!lat || !lon || lat === 0 || lon === 0) {
+                    continue;
+                }
+
+                if (Math.abs(lat) > 90 || Math.abs(lon) > 180) {
+                    console.log(`Invalid coordinates: lat=${lat}, lon=${lon}`);
+                    continue;
+                }
+
+                if (supabase) {
+                    const tweet_id = item.id || item.id_str || `tweet_${Date.now()}_${processedCount}`;
+                    const text = tweetText;
+                    const author = item.author || item.user || {};
+                    const username = author.userName || author.screen_name || "unknown";
+                    const createdAt = new Date(item.createdAt || item.created_at || Date.now()).toISOString();
+                    const sanitizedTopic = topic.replace(/\s+/g, "_").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+
+                    const { error } = await supabase.from('tweets').insert({
+                        id: tweet_id,
+                        content: text,
+                        username: username,
+                        latitude: lat,
+                        longitude: lon,
+                        created_at: createdAt,
+                        topic: sanitizedTopic
+                    });
+
+                    if (error) {
+                        console.error('Error inserting tweet:', error);
+                    } else {
+                        insertedCount++;
+                    }
+                }
+            }
+        }
+
+        console.log(`Processed ${processedCount}/${items.length} tweets, inserted ${insertedCount} to database`);
+    } catch (error) {
+        console.error('Error processing tweets:', error);
+        if (error instanceof Error) {
+            console.error('Error details:', error.message);
+        }
+    }
+}
+
 let supabase: SupabaseClient | null = null;
 
 const app = express();
