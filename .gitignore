@@ -37,10 +37,6 @@ build/
 .DS_Store
 Thumbs.db
 
-# Cache
-cache/
-*.cache
-
 # Logs
 logs/
 *.log
