@@ -332,6 +332,53 @@ app.get("/api/summary/:topic", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/api/sentiment/all", async (_req: Request, res: Response) => {
+  try {
+    const trendsFile = path.join(CACHE_DIR, 'trends_us.json');
+    const trends = fs.existsSync(trendsFile)
+      ? JSON.parse(fs.readFileSync(trendsFile, 'utf-8'))
+      : [];
+
+    const clusters: any[] = [];
+    const articles: any[] = [];
+    let articleId = 1;
+
+    trends.forEach((topic: string, index: number) => {
+      const clusterId = index + 1;
+
+      clusters.push({
+        cluster_id: clusterId,
+        cluster_title: topic,
+        cluster_summary: `Customer feedback and discussions about ${topic}`
+      });
+
+      const topicFileName = `tweets_${topic.replace(/\s+/g, '_')}.json`;
+      const topicFile = path.join(CACHE_DIR, topicFileName);
+
+      if (fs.existsSync(topicFile)) {
+        const tweets = JSON.parse(fs.readFileSync(topicFile, 'utf-8'));
+
+        tweets.forEach((tweet: any) => {
+          articles.push({
+            article_id: articleId++,
+            title: `${tweet.author?.name || 'Unknown'} - ${topic}`,
+            text: tweet.text,
+            article_summary: tweet.text.length > 100 ? tweet.text.substring(0, 100) + '...' : tweet.text,
+            source: `${tweet.location?.city || 'Unknown'}, ${tweet.location?.state || ''}`,
+            cluster_id: clusterId
+          });
+        });
+      }
+    });
+
+    console.log(`Serving ${clusters.length} clusters with ${articles.length} articles to graph view`);
+    res.json({ clusters, articles });
+  } catch (err) {
+    console.error("Error fetching sentiment data:", err);
+    res.status(500).json({ error: "Failed to fetch sentiment data" });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
