@@ -142,7 +142,76 @@ class DataOrchestrator:
             print(f"[DataOrchestrator] Error loading trends cache: {e}")
             return None
 
+    def run(
+        self,
+        force_refresh: bool = False,
+        max_tweets_per_topic: int = 50,
+        use_real_trends: bool = False
+    ) -> None:
+        """Run the complete data orchestration pipeline"""
+        print("\n" + "="*70)
+        print("T-MOBILE SENTIMENT DATA ORCHESTRATOR")
+        print("="*70)
+
+        # Check if we already have cached data
+        if not force_refresh and self.check_cache_exists():
+            print("\n✓ Cache data already exists!")
+            print("  Use --force-refresh to scrape fresh data")
+            return
+
+        # Step 1: Get trending topics
+        print("\n[1/3] Getting trending topics...")
+        trends = self.scrape_trends_from_web(use_tmobile_topics=not use_real_trends)
+        self.save_trends_cache(trends)
+
+        # Step 2: Scrape tweets for each trend
+        print(f"\n[2/3] Scraping tweets for {len(trends)} topics...")
+        print(f"  Max tweets per topic: {max_tweets_per_topic}")
+
+        results = scrape_topics_from_list(
+            topics=trends,
+            max_items_per_topic=max_tweets_per_topic,
+            force_refresh=True
+        )
+
+        total_tweets = sum(len(tweets) for tweets in results.values())
+        print(f"\n  Total tweets scraped: {total_tweets}")
+
+        # Step 3: Scrape DownDetector data
+        print("\n[3/3] Scraping DownDetector data...")
+        downdetector_data = get_downdetector_data(force_refresh=True)
+
+        if downdetector_data:
+            print("  ✓ DownDetector data scraped successfully")
+        else:
+            print("  ✗ Failed to scrape DownDetector data")
+
+        print("\n" + "="*70)
+        print("DATA ORCHESTRATION COMPLETE!")
+        print("="*70)
+        print(f"\nSummary:")
+        print(f"  Topics tracked: {len(trends)}")
+        print(f"  Tweets collected: {total_tweets}")
+        print(f"  DownDetector data: {'Yes' if downdetector_data else 'No'}")
+        print(f"\nCache directory: {self.cache_dir.absolute()}")
+
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="T-Mobile Sentiment Data Orchestrator")
+    parser.add_argument("--force-refresh", action="store_true", help="Force refresh all data")
+    parser.add_argument("--max-tweets", type=int, default=50, help="Max tweets per topic")
+    parser.add_argument("--real-trends", action="store_true", help="Use real trends instead of T-Mobile topics")
+
+    args = parser.parse_args()
+
+    orchestrator = DataOrchestrator()
+    orchestrator.run(
+        force_refresh=args.force_refresh,
+        max_tweets_per_topic=args.max_tweets,
+        use_real_trends=args.real_trends
+    )
+
     print("Data Orchestrator Module")
     print(f"Tracking {len(TMOBILE_CORE_TOPICS)} T-Mobile topics")
