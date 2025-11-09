@@ -293,6 +293,45 @@ app.get("/api/flattened/:topic", async (req: Request, res: Response) => {
   }
 });
 
+async function getTopicSelection(topic: string, count = 20): Promise<string[]> {
+  if (!supabase) return [];
+
+  const sanitizedTopic = topic.replace(/\s+/g, "_").replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+  const { data: allTweets, error } = await supabase
+    .from('tweets')
+    .select('content')
+    .eq('topic', sanitizedTopic);
+
+  if (error || !allTweets) return [];
+
+  const shuffled = allTweets.sort(() => 0.5 - Math.random());
+  console.log(shuffled);
+  return shuffled.slice(0, Math.min(count, shuffled.length)).map((t) => t.content);
+}
+
+async function summarizeGemini(topic: string) {
+  const tweets = await getTopicSelection(topic, 20);
+  if (tweets.length === 0) return "No tweets available for this topic.";
+  console.log(tweets);
+
+  const prompt = `You are a helpful assistant summarizing social media activity. Summarize the following ${tweets.length} tweets about the topic "${topic}". Summarize the main themes and what people are saying. Identify the general consensus or mood (positive, negative, mixed). If there are disagreements or distinct groups of opinions, describe them briefly. Keep the maximum word count at 75. Tweets: ${tweets.join("\n")}`;
+  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const result = await model.generateContent(prompt);
+  console.log(result);
+  return result.response.text();
+}
+
+app.get("/api/summary/:topic", async (req: Request, res: Response) => {
+  try {
+    const topic = decodeURIComponent(req.params.topic);
+    const summary = await summarizeGemini(topic);
+    res.json({ topic, summary });
+  } catch (err) {
+    console.error("Error summarizing topic:", err);
+    res.status(500).json({ error: "Failed to summarize topic" });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
