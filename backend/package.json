@@ -13,7 +13,8 @@
     "scrape:full": "python data_orchestrator.py --force-refresh --max-tweets 100",
     "scrape:trends": "python data_orchestrator.py --force-refresh --real-trends",
     "test:twitter": "python twitter_generator.py",
-    "test:downdetector": "python downdetector_scraper.py"
+    "test:downdetector": "python downdetector_scraper.py",
+    "generate:audio": "python generate_topic_audio.py"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

@@ -147,7 +147,7 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
       className
     )}>
       {/* Content */}
-      <div className="p-4 overflow-y-auto overflow-x-hidden max-h-[500px] no-scrollbar">
+      <div className="p-4 overflow-y-auto overflow-x-hidden max-h-[650px] no-scrollbar">
         {!hoveredTweets && currentData.length === 0 && (
           <p className="text-sm text-white/50 font-light text-center py-8">
             select a topic or hover over a location to analyze customer happiness
@@ -281,9 +281,6 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
                 <div className="flex flex-wrap gap-2 pt-3 border-t border-white/10">
                   <span className="px-2 py-1 bg-[#E20074]/20 border border-[#E20074]/30 rounded-md text-xs text-white/70 font-light">
                     {insightData.tweetCount} analyzed
-                  </span>
-                  <span className="px-2 py-1 bg-blue-500/20 border border-blue-500/30 rounded-md text-xs text-white/70 font-light">
-                    real-time
                   </span>
                 </div>
               </CardContent>
