@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { api } from '../../lib/apiClient';
 
 interface DownDetectorData {
   logo: string;
@@ -25,8 +26,7 @@ const OutageMonitor: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/downdetector')
-      .then(res => res.json())
+    api.getDownDetector()
       .then(setData)
       .catch(err => console.error('Error fetching downdetector data:', err))
       .finally(() => setLoading(false));

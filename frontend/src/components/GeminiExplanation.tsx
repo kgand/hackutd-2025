@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
+import { api } from "../lib/apiClient";
 
 interface GeminiExplanationProps {
   topic: string | null;
@@ -19,8 +20,7 @@ export function GeminiExplanation({ topic, className }: GeminiExplanationProps) 
     setShowButton(false);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/summary/${encodeURIComponent(topic)}`);
-      const data = await response.json();
+      const data = await api.getSummary(topic);
 
 
       const fullText = data.summary;

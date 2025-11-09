@@ -7,6 +7,7 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command';
+import { api } from '../lib/apiClient';
 
 export interface AutocompleteSuggestion {
   placeId: string;
@@ -32,11 +33,7 @@ async function fetchCachedCities(query: string): Promise<AutocompleteSuggestion[
 
   try {
 
-    const response = await fetch('http://localhost:3000/api/flattened');
-    if (!response.ok) {
-      throw new Error(`API call failed with status: ${response.status}`);
-    }
-    const tweets = await response.json();
+    const tweets = await api.getFlattened();
 
 
     const cityMap = new Map<string, AutocompleteSuggestion>();

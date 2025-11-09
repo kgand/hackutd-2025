@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import HoverInfoPanel from '../components/HoverInfoPanel';
 import SearchBar from '../components/SearchBar';
 import InsightsPanel from '../components/InsightsPanel';
+import { api } from '../lib/apiClient';
 import '../App.css';
 
 
@@ -39,10 +40,6 @@ interface HoverInfo {
   pixel?: number[];
   layer?: any;
 }
-
-
-const BASE_API_URL = 'http://localhost:3000/api/flattened';
-
 
 interface ExplorerProps {
   initialCity?: string;
@@ -105,15 +102,10 @@ const Explorer: React.FC<ExplorerProps> = ({ initialCity }) => {
     }
 
     try {
-      const url = topic ? `${BASE_API_URL}/${topic}` : BASE_API_URL;
-      console.log('Fetching data from:', url);
+      console.log('Fetching data for topic:', topic || 'all topics');
 
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
+      // Use apiClient with automatic fallback to cache
+      const data = topic ? await api.getFlattenedByTopic(topic) : await api.getFlattened();
 
 
       const validData = data.filter((item: TweetData) => {

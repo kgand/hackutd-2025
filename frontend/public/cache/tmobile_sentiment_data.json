@@ -1,0 +1,389 @@
+[
+  {
+    "cluster_id": 1,
+    "cluster_title": "5G Network Performance",
+    "cluster_summary": "Customer feedback about T-Mobile's 5G network speed, coverage, and reliability across major cities and rural areas.",
+    "articles": [
+      {
+        "id": "fb_5g_001",
+        "text": "Just tested T-Mobile's 5G in downtown Seattle - getting 800+ Mbps! This is faster than my home WiFi. Streaming 4K video with zero buffering.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "TechEnthusiast_Sarah",
+        "location": "Seattle, WA",
+        "timestamp": "2025-11-09T03:05:53.801Z",
+        "category": "Network Speed",
+        "score": 9.2
+      },
+      {
+        "id": "fb_5g_002",
+        "text": "T-Mobile 5G Ultra Capacity is a game changer in Chicago! Downloaded a 2GB file in under 30 seconds. This is the future of mobile connectivity.",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "ChicagoCommuter_Mike",
+        "location": "Chicago, IL",
+        "timestamp": "2025-11-09T01:05:53.803Z",
+        "category": "Network Speed",
+        "score": 9.5
+      },
+      {
+        "id": "fb_5g_003",
+        "text": "Disappointed with 5G coverage in rural Texas. Still dropping to LTE most of the time outside city limits. Expected better from T-Mobile.",
+        "sentiment": "negative",
+        "source": "Twitter",
+        "author": "RuralUser_John",
+        "location": "Austin, TX",
+        "timestamp": "2025-11-08T23:05:53.803Z",
+        "category": "Coverage Issues",
+        "score": 3.8
+      },
+      {
+        "id": "fb_5g_004",
+        "text": "T-Mobile's 5G in NYC is phenomenal! Streaming live sports on the subway with no lag. Best network experience I've ever had.",
+        "sentiment": "positive",
+        "source": "App Store Review",
+        "author": "NYCNative_Lisa",
+        "location": "New York, NY",
+        "timestamp": "2025-11-08T21:05:53.803Z",
+        "category": "Network Performance",
+        "score": 9
+      },
+      {
+        "id": "fb_5g_005",
+        "text": "5G speeds are great when I have it, but coverage is spotty in my neighborhood. Keeps switching between 5G and LTE throughout the day.",
+        "sentiment": "neutral",
+        "source": "Twitter",
+        "author": "SuburbanUser_Dave",
+        "location": "Denver, CO",
+        "timestamp": "2025-11-08T19:05:53.803Z",
+        "category": "Coverage Consistency",
+        "score": 6.5
+      },
+      {
+        "id": "fb_5g_006",
+        "text": "Switched from Verizon to T-Mobile for 5G and couldn't be happier! Faster speeds, better coverage, and $40 less per month. Win-win-win!",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "SwitcherSuccess_Amy",
+        "location": "Los Angeles, CA",
+        "timestamp": "2025-11-08T17:05:53.803Z",
+        "category": "Network Speed",
+        "score": 9.7
+      },
+      {
+        "id": "fb_5g_007",
+        "text": "T-Mobile 5G at the airport is lightning fast! Downloaded all my Netflix shows for the flight in minutes. This is incredible technology.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "FrequentFlyer_Tom",
+        "location": "Miami, FL",
+        "timestamp": "2025-11-08T15:05:53.803Z",
+        "category": "Network Speed",
+        "score": 9.3
+      },
+      {
+        "id": "fb_5g_008",
+        "text": "Building penetration for 5G needs improvement. Great speeds outside, but signal drops significantly when I'm inside my office building.",
+        "sentiment": "neutral",
+        "source": "Reddit",
+        "author": "OfficeWorker_Brad",
+        "location": "San Francisco, CA",
+        "timestamp": "2025-11-08T13:05:53.803Z",
+        "category": "Coverage Issues",
+        "score": 6
+      }
+    ]
+  },
+  {
+    "cluster_id": 2,
+    "cluster_title": "Customer Service Experience",
+    "cluster_summary": "Reviews and feedback about T-Mobile customer service interactions, support quality, and problem resolution effectiveness.",
+    "articles": [
+      {
+        "id": "fb_cs_001",
+        "text": "Called T-Mobile customer service about a billing issue - resolved in 10 minutes with the friendliest rep! No hold time, no hassle. This is how customer service should be done.",
+        "sentiment": "positive",
+        "source": "Trustpilot",
+        "author": "HappyCustomer_Jennifer",
+        "location": "Boston, MA",
+        "timestamp": "2025-11-09T02:05:53.803Z",
+        "category": "Support Quality",
+        "score": 9.5
+      },
+      {
+        "id": "fb_cs_002",
+        "text": "T-Mobile's Team of Experts program is amazing! Same dedicated team every time I call. They actually know my account history and preferences.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "LoyalCustomer_Robert",
+        "location": "Dallas, TX",
+        "timestamp": "2025-11-09T00:05:53.803Z",
+        "category": "Support Quality",
+        "score": 9.8
+      },
+      {
+        "id": "fb_cs_003",
+        "text": "Been on hold with customer service for 45 minutes trying to unlock my device. This is frustrating and wasting my time.",
+        "sentiment": "negative",
+        "source": "Twitter",
+        "author": "FrustratedUser_Kelly",
+        "location": "Phoenix, AZ",
+        "timestamp": "2025-11-08T22:05:53.803Z",
+        "category": "Wait Times",
+        "score": 2.5
+      },
+      {
+        "id": "fb_cs_004",
+        "text": "The T-Mobile app makes everything so easy! Upgraded my plan, added a line, and managed my account without calling anyone. Self-service done right!",
+        "sentiment": "positive",
+        "source": "App Store Review",
+        "author": "TechSavvy_Marcus",
+        "location": "Atlanta, GA",
+        "timestamp": "2025-11-08T20:05:53.803Z",
+        "category": "Digital Experience",
+        "score": 9
+      },
+      {
+        "id": "fb_cs_005",
+        "text": "Visited T-Mobile store for a phone upgrade. Staff was knowledgeable, patient, and helped me pick the perfect phone for my needs. Great in-store experience!",
+        "sentiment": "positive",
+        "source": "Google Reviews",
+        "author": "StoreVisitor_Patricia",
+        "location": "Portland, OR",
+        "timestamp": "2025-11-08T18:05:53.803Z",
+        "category": "Store Experience",
+        "score": 8.8
+      },
+      {
+        "id": "fb_cs_006",
+        "text": "Chat support was helpful but took a while to resolve my international roaming question. Eventually got it sorted, but could've been faster.",
+        "sentiment": "neutral",
+        "source": "Twitter",
+        "author": "Traveler_Diana",
+        "location": "San Diego, CA",
+        "timestamp": "2025-11-08T16:05:53.803Z",
+        "category": "Support Quality",
+        "score": 7
+      },
+      {
+        "id": "fb_cs_007",
+        "text": "T-Mobile's customer service twitter team is incredibly responsive! Got my issue resolved through DM in less than an hour. Social support done right!",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "SocialUser_Chris",
+        "location": "Nashville, TN",
+        "timestamp": "2025-11-08T14:05:53.803Z",
+        "category": "Social Support",
+        "score": 9.2
+      }
+    ]
+  },
+  {
+    "cluster_id": 3,
+    "cluster_title": "Pricing & Value",
+    "cluster_summary": "Customer sentiment about T-Mobile's pricing, plan value, promotional offers, and overall cost-effectiveness compared to competitors.",
+    "articles": [
+      {
+        "id": "fb_price_001",
+        "text": "Magenta MAX plan is incredible value! Unlimited everything, Netflix included, and international data. Paying less than I did with AT&T for half the features.",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "ValueSeeker_Jason",
+        "location": "Houston, TX",
+        "timestamp": "2025-11-09T02:35:53.803Z",
+        "category": "Plan Value",
+        "score": 9.3
+      },
+      {
+        "id": "fb_price_002",
+        "text": "T-Mobile Tuesdays gives me free stuff every week! Free tacos, movie rentals, and discounts. It's like getting rewards just for being a customer.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "DealHunter_Samantha",
+        "location": "Las Vegas, NV",
+        "timestamp": "2025-11-09T00:35:53.803Z",
+        "category": "Perks & Rewards",
+        "score": 8.5
+      },
+      {
+        "id": "fb_price_003",
+        "text": "Family plan pricing is unbeatable. Four lines with unlimited data for $140. Switched the whole family from Verizon and saving $80/month!",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "FamilyPlan_David",
+        "location": "Philadelphia, PA",
+        "timestamp": "2025-11-08T22:35:53.803Z",
+        "category": "Family Plans",
+        "score": 9.6
+      },
+      {
+        "id": "fb_price_004",
+        "text": "Price increase notification caught me off guard. Understand costs go up, but would appreciate more advance notice and explanation.",
+        "sentiment": "neutral",
+        "source": "Twitter",
+        "author": "LongtimeCustomer_Susan",
+        "location": "Columbus, OH",
+        "timestamp": "2025-11-08T20:35:53.803Z",
+        "category": "Price Changes",
+        "score": 6.5
+      },
+      {
+        "id": "fb_price_005",
+        "text": "Senior plan is perfect for my parents! Unlimited data, talk, text at $70 for two lines. Finally got them off their ancient flip phones!",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "HelpfulChild_Emma",
+        "location": "Minneapolis, MN",
+        "timestamp": "2025-11-08T18:35:53.803Z",
+        "category": "Senior Plans",
+        "score": 9
+      },
+      {
+        "id": "fb_price_006",
+        "text": "Military discount is awesome! 50% off and they actually verify properly. Thanks T-Mobile for supporting those who serve!",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "Veteran_Michael",
+        "location": "San Antonio, TX",
+        "timestamp": "2025-11-08T16:35:53.803Z",
+        "category": "Discounts",
+        "score": 9.8
+      }
+    ]
+  },
+  {
+    "cluster_id": 4,
+    "cluster_title": "Device & Phone Deals",
+    "cluster_summary": "Customer reactions to T-Mobile's phone promotions, trade-in offers, device financing options, and new phone releases.",
+    "articles": [
+      {
+        "id": "fb_device_001",
+        "text": "Just traded in my old iPhone for the new 15 Pro Max - got $1000 trade-in credit! T-Mobile's phone deals are the best in the business.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "iPhoneFan_Alex",
+        "location": "Seattle, WA",
+        "timestamp": "2025-11-09T01:35:53.803Z",
+        "category": "Trade-In Deals",
+        "score": 9.5
+      },
+      {
+        "id": "fb_device_002",
+        "text": "Free Samsung Galaxy S24 with new line! Can't believe this deal. T-Mobile's promotions are incredible compared to other carriers.",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "AndroidUser_Rachel",
+        "location": "Charlotte, NC",
+        "timestamp": "2025-11-08T23:35:53.803Z",
+        "category": "Phone Promotions",
+        "score": 9.7
+      },
+      {
+        "id": "fb_device_003",
+        "text": "Device financing with $0 down makes upgrading so much easier. Got the latest phone without breaking the bank. Smart financing options!",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "BudgetConscious_Tyler",
+        "location": "Indianapolis, IN",
+        "timestamp": "2025-11-08T21:35:53.803Z",
+        "category": "Financing",
+        "score": 8.8
+      },
+      {
+        "id": "fb_device_004",
+        "text": "Trade-in process was smooth and quick. Sent in my old phone, got credit within a week. No hassles, no surprises. Exactly as promised.",
+        "sentiment": "positive",
+        "source": "Trustpilot",
+        "author": "SmoothExperience_Olivia",
+        "location": "Sacramento, CA",
+        "timestamp": "2025-11-08T19:35:53.803Z",
+        "category": "Trade-In Process",
+        "score": 9
+      },
+      {
+        "id": "fb_device_005",
+        "text": "T-Mobile had the new Galaxy Z Fold in stock when everywhere else was sold out. Pre-order process was seamless, got it on launch day!",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "EarlyAdopter_Nathan",
+        "location": "Austin, TX",
+        "timestamp": "2025-11-08T17:35:53.803Z",
+        "category": "Device Availability",
+        "score": 9.3
+      }
+    ]
+  },
+  {
+    "cluster_id": 5,
+    "cluster_title": "Network Reliability & Coverage",
+    "cluster_summary": "Feedback about T-Mobile's overall network reliability, service consistency, coverage expansion, and performance in various locations.",
+    "articles": [
+      {
+        "id": "fb_network_001",
+        "text": "Network reliability has improved dramatically in the past year. Haven't had a dropped call in months. Coverage in my area is now excellent!",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "ImprovedService_Brian",
+        "location": "Raleigh, NC",
+        "timestamp": "2025-11-09T02:17:53.803Z",
+        "category": "Network Improvement",
+        "score": 8.9
+      },
+      {
+        "id": "fb_network_002",
+        "text": "T-Mobile's coverage in national parks is surprisingly good! Stayed connected during my Yellowstone trip. Perfect for sharing photos and staying in touch.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "NatureLover_Melissa",
+        "location": "Salt Lake City, UT",
+        "timestamp": "2025-11-09T00:17:53.803Z",
+        "category": "Rural Coverage",
+        "score": 8.7
+      },
+      {
+        "id": "fb_network_003",
+        "text": "Data speeds during peak hours could be better. Notice significant slowdown during lunch and evening commute times in downtown area.",
+        "sentiment": "neutral",
+        "source": "Reddit",
+        "author": "CommuterDaily_Frank",
+        "location": "San Francisco, CA",
+        "timestamp": "2025-11-08T22:17:53.803Z",
+        "category": "Congestion Issues",
+        "score": 6.2
+      },
+      {
+        "id": "fb_network_004",
+        "text": "Coverage map shows 5G in my area but reality is different. Mostly on LTE. Hope they expand true 5G coverage soon.",
+        "sentiment": "negative",
+        "source": "Twitter",
+        "author": "CoverageConcern_Angela",
+        "location": "Kansas City, MO",
+        "timestamp": "2025-11-08T20:17:53.803Z",
+        "category": "Coverage Accuracy",
+        "score": 4.5
+      },
+      {
+        "id": "fb_network_005",
+        "text": "Indoor coverage in large buildings is solid. Work in a massive office complex and have full bars throughout. Big improvement from last year!",
+        "sentiment": "positive",
+        "source": "Reddit",
+        "author": "OfficeWorker_Stephen",
+        "location": "Chicago, IL",
+        "timestamp": "2025-11-08T18:17:53.803Z",
+        "category": "Indoor Coverage",
+        "score": 8.5
+      },
+      {
+        "id": "fb_network_006",
+        "text": "International roaming in Europe was flawless! Unlimited data worked perfectly in 10 countries. This feature alone makes T-Mobile worth it for travelers.",
+        "sentiment": "positive",
+        "source": "Twitter",
+        "author": "GlobalTraveler_Michelle",
+        "location": "New York, NY",
+        "timestamp": "2025-11-08T16:17:53.803Z",
+        "category": "International Service",
+        "score": 9.8
+      }
+    ]
+  }
+]

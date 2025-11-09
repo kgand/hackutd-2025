@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import DecryptedText from './DecryptedText';
+import { api } from '../lib/apiClient';
 
 interface IntelligentSearchProps {
   onSearch: (query: string, type: 'city' | 'topic' | 'both', city?: string, topic?: string) => void;
@@ -16,8 +17,8 @@ const IntelligentSearch: React.FC<IntelligentSearchProps> = ({ onSearch }) => {
 
   useEffect(() => {
     Promise.all([
-      fetch('http://localhost:3000/api/sentiment/all').then(res => res.json()),
-      fetch('http://localhost:3000/api/flattened').then(res => res.json())
+      api.getSentimentAll(),
+      api.getFlattened()
     ])
       .then(([trendsData, tweetsData]) => {
 

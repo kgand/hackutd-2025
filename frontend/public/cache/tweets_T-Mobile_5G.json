@@ -1,0 +1,308 @@
+[
+  {
+    "id": "17626663735652960",
+    "text": "Switched from Verizon to T-Mobile for 5G. No regrets! Coverage is excellent in San Francisco",
+    "createdAt": "Sat, 08 Nov 2025 18:32:53 GMT",
+    "author": {
+      "userName": "lewisa32",
+      "name": "Andrew Lewis"
+    },
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -122.4194,
+        37.7749
+      ]
+    }
+  },
+  {
+    "id": "176266637357653981",
+    "text": "Disappointed with 5G coverage in Seattle. Keeps dropping to 4G LTE 😞 @TMobileHelp",
+    "createdAt": "Fri, 07 Nov 2025 16:32:53 GMT",
+    "author": {
+      "userName": "browne87",
+      "name": "Emily Brown"
+    },
+    "location": {
+      "city": "Seattle",
+      "state": "WA",
+      "country": "USA",
+      "coordinates": [
+        -122.3321,
+        47.6062
+      ]
+    }
+  },
+  {
+    "id": "176266637357680732",
+    "text": "Just tested T-Mobile 5G in Jacksonville and got 298Mbps download! 🚀 This is insane! #TMobile5G",
+    "createdAt": "Sun, 09 Nov 2025 00:32:53 GMT",
+    "author": {
+      "userName": "whited8",
+      "name": "Daniel White"
+    },
+    "location": {
+      "city": "Jacksonville",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -81.6557,
+        30.3322
+      ]
+    }
+  },
+  {
+    "id": "176266637357611513",
+    "text": "Just tested T-Mobile 5G in Columbus and got 801Mbps download! 🚀 This is insane! #TMobile5G",
+    "createdAt": "Fri, 07 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "lopezk47",
+      "name": "Karen Lopez"
+    },
+    "location": {
+      "city": "Columbus",
+      "state": "OH",
+      "country": "USA",
+      "coordinates": [
+        -82.9988,
+        39.9612
+      ]
+    }
+  },
+  {
+    "id": "176266637357624524",
+    "text": "T-Mobile's 5G network expansion is impressive! Finally getting good speeds in my neighborhood 🎉",
+    "createdAt": "Thu, 06 Nov 2025 12:32:53 GMT",
+    "author": {
+      "userName": "michellefan",
+      "name": "Michelle Martin"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  },
+  {
+    "id": "176266637357629055",
+    "text": "Just tested T-Mobile 5G in Sacramento and got 353Mbps download! 🚀 This is insane! #TMobile5G",
+    "createdAt": "Fri, 07 Nov 2025 16:32:53 GMT",
+    "author": {
+      "userName": "harrisd77",
+      "name": "Daniel Harris"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  },
+  {
+    "id": "17626663735765336",
+    "text": "The 5G speeds on T-Mobile are absolutely incredible! 305Mbps in Las Vegas 🔥",
+    "createdAt": "Sun, 09 Nov 2025 03:32:53 GMT",
+    "author": {
+      "userName": "melissa_clark",
+      "name": "Melissa Jones"
+    },
+    "location": {
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "USA",
+      "coordinates": [
+        -115.1398,
+        36.1699
+      ]
+    }
+  },
+  {
+    "id": "176266637357673687",
+    "text": "T-Mobile 5G Ultra Capacity is a game changer! Video calls are crystal clear now",
+    "createdAt": "Sat, 08 Nov 2025 12:32:53 GMT",
+    "author": {
+      "userName": "amandalife",
+      "name": "Amanda Johnson"
+    },
+    "location": {
+      "city": "Chicago",
+      "state": "IL",
+      "country": "USA",
+      "coordinates": [
+        -87.6298,
+        41.8781
+      ]
+    }
+  },
+  {
+    "id": "176266637357659718",
+    "text": "T-Mobile 5G is no joke. Streaming 4K on the subway with zero buffering 😍 @TMobile",
+    "createdAt": "Fri, 07 Nov 2025 15:32:53 GMT",
+    "author": {
+      "userName": "NicoleRodriguez582",
+      "name": "Nicole Rodriguez"
+    },
+    "location": {
+      "city": "Minneapolis",
+      "state": "MN",
+      "country": "USA",
+      "coordinates": [
+        -93.265,
+        44.9778
+      ]
+    }
+  },
+  {
+    "id": "176266637357668009",
+    "text": "Anyone else experiencing battery drain with T-Mobile 5G? Otherwise speeds are great 🤔",
+    "createdAt": "Thu, 06 Nov 2025 06:32:53 GMT",
+    "author": {
+      "userName": "MichaelMartinez851",
+      "name": "Michael Martinez"
+    },
+    "location": {
+      "city": "Dallas",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -96.797,
+        32.7767
+      ]
+    }
+  },
+  {
+    "id": "1762666373576335210",
+    "text": "Finally switched to T-Mobile for the 5G. Getting 635+ Mbps in downtown New York! Best decision ever 📱",
+    "createdAt": "Fri, 07 Nov 2025 09:32:53 GMT",
+    "author": {
+      "userName": "lewisa30",
+      "name": "Andrew Lewis"
+    },
+    "location": {
+      "city": "New York",
+      "state": "NY",
+      "country": "USA",
+      "coordinates": [
+        -74.006,
+        40.7128
+      ]
+    }
+  },
+  {
+    "id": "1762666373576395211",
+    "text": "T-Mobile 5G is no joke. Streaming 4K on the subway with zero buffering 😍 @TMobile",
+    "createdAt": "Fri, 07 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "justinmobile",
+      "name": "Justin Jones"
+    },
+    "location": {
+      "city": "Indianapolis",
+      "state": "IN",
+      "country": "USA",
+      "coordinates": [
+        -86.1581,
+        39.7684
+      ]
+    }
+  },
+  {
+    "id": "1762666373576280912",
+    "text": "T-Mobile's 5G network expansion is impressive! Finally getting good speeds in my neighborhood 🎉",
+    "createdAt": "Sat, 08 Nov 2025 10:32:53 GMT",
+    "author": {
+      "userName": "karen_moore",
+      "name": "Karen Walker"
+    },
+    "location": {
+      "city": "Denver",
+      "state": "CO",
+      "country": "USA",
+      "coordinates": [
+        -104.9903,
+        39.7392
+      ]
+    }
+  },
+  {
+    "id": "1762666373576615213",
+    "text": "The 5G speeds on T-Mobile are absolutely incredible! 924Mbps in Detroit 🔥",
+    "createdAt": "Thu, 06 Nov 2025 17:32:53 GMT",
+    "author": {
+      "userName": "LaurenThomas55",
+      "name": "Lauren Thomas"
+    },
+    "location": {
+      "city": "Detroit",
+      "state": "MI",
+      "country": "USA",
+      "coordinates": [
+        -83.0458,
+        42.3314
+      ]
+    }
+  },
+  {
+    "id": "1762666373576162414",
+    "text": "Just tested T-Mobile 5G in Phoenix and got 216Mbps download! 🚀 This is insane! #TMobile5G",
+    "createdAt": "Sat, 08 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "karen_king",
+      "name": "Karen Anderson"
+    },
+    "location": {
+      "city": "Phoenix",
+      "state": "AZ",
+      "country": "USA",
+      "coordinates": [
+        -112.074,
+        33.4484
+      ]
+    }
+  },
+  {
+    "id": "1762666373576397615",
+    "text": "T-Mobile 5G Ultra Capacity is a game changer! Video calls are crystal clear now",
+    "createdAt": "Sun, 09 Nov 2025 05:32:53 GMT",
+    "author": {
+      "userName": "allenk35",
+      "name": "Karen Allen"
+    },
+    "location": {
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "USA",
+      "coordinates": [
+        -87.9065,
+        43.0389
+      ]
+    }
+  },
+  {
+    "id": "1762666373576550316",
+    "text": "The 5G speeds on T-Mobile are absolutely incredible! 528Mbps in Sacramento 🔥",
+    "createdAt": "Sat, 08 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "thompsona56",
+      "name": "Andrew Thompson"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  }
+]

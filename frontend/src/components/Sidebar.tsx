@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { cn } from '../lib/utils';
 import { Button } from './ui/button';
 import DecryptedText from './DecryptedText';
-
+import { api } from '../lib/apiClient';
 
 
 interface SidebarProps {
@@ -32,8 +32,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
 
   const fetchTrends = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/trends");
-      const data = await response.json();
+      const data = await api.getTrends();
       setTrends(data);
       console.log("Fetched trends:", data);
     } catch (error) {
