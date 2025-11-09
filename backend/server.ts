@@ -1,8 +1,11 @@
 import express, { type Request, type Response } from "express";
-import cors from "cors";
-import dotenv from "dotenv";
+import axios from "axios";
 import { createClient } from '@supabase/supabase-js';
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { ApifyClient } from 'apify-client';
+import cors from "cors";
+import * as cheerio from "cheerio";
+import dotenv from "dotenv";
 import * as fs from "fs";
 import * as path from "path";
 import { fileURLToPath } from 'url';
@@ -13,7 +16,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CACHE_DIR = path.join(__dirname, 'cache');
 
+const TOKEN = process.env.apify_token;
+const ACTOR = process.env.apify_actor;
+
 let supabase: SupabaseClient | null = null;
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+const client = new ApifyClient({
+    token: TOKEN || "",
+});
 
 // Cache management functions
 function ensureCacheDir() {
