@@ -213,6 +213,97 @@ class TwitterScraper:
         print(f"[TwitterScraper] Successfully processed {len(processed)}/{len(tweets)} tweets")
         return processed
 
+    def save_to_cache(self, cache_key: str, data: Any) -> None:
+        """Save data to cache file"""
+        try:
+            cache_file = CACHE_DIR / f"{cache_key}.json"
+            with open(cache_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            print(f"[TwitterScraper] Saved {len(data) if isinstance(data, list) else 'data'} to {cache_file}")
+        except Exception as e:
+            print(f"[TwitterScraper] Error saving cache: {e}")
+
+    def load_from_cache(self, cache_key: str) -> Optional[Any]:
+        """Load data from cache file"""
+        try:
+            cache_file = CACHE_DIR / f"{cache_key}.json"
+            if not cache_file.exists():
+                return None
+
+            with open(cache_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            print(f"[TwitterScraper] Loaded from cache: {cache_key}")
+            return data
+        except Exception as e:
+            print(f"[TwitterScraper] Error loading cache: {e}")
+            return None
+
+    def scrape_and_cache_topic(
+        self,
+        topic: str,
+        max_items: int = 100,
+        force_refresh: bool = False
+    ) -> List[Dict[str, Any]]:
+        """Scrape tweets for a topic with caching"""
+        cache_key = f"tweets_{topic.replace(' ', '_')}"
+
+        # Check cache first
+        if not force_refresh:
+            cached = self.load_from_cache(cache_key)
+            if cached:
+                return cached
+
+        # Scrape fresh data
+        print(f"\n{'='*60}")
+        print(f"Scraping topic: {topic}")
+        print(f"{'='*60}")
+
+        raw_tweets = self.scrape_tweets(
+            search_terms=[topic],
+            max_items=max_items,
+            since_hours=24
+        )
+
+        if not raw_tweets:
+            print(f"[TwitterScraper] No tweets found for topic: {topic}")
+            return []
+
+        # Process tweets
+        processed = self.process_tweets(raw_tweets, extract_locations=True)
+
+        # Save to cache
+        self.save_to_cache(cache_key, processed)
+
+        return processed
+
+
+def scrape_topics_from_list(
+    topics: List[str],
+    max_items_per_topic: int = 50,
+    force_refresh: bool = False
+) -> Dict[str, List[Dict[str, Any]]]:
+    """Scrape multiple topics with caching"""
+    scraper = TwitterScraper()
+    results = {}
+
+    for topic in topics:
+        try:
+            tweets = scraper.scrape_and_cache_topic(
+                topic,
+                max_items=max_items_per_topic,
+                force_refresh=force_refresh
+            )
+            results[topic] = tweets
+
+            # Rate limiting
+            time.sleep(2)
+
+        except Exception as e:
+            print(f"[Error] Failed to scrape topic '{topic}': {e}")
+            results[topic] = []
+
+    return results
+
 
 if __name__ == "__main__":
     print("Twitter Scraper Module")
