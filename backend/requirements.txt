@@ -1,0 +1,7 @@
+flask
+flask-cors
+requests
+beautifulsoup4
+apify-client
+python-dotenv
+lxml
