@@ -102,8 +102,68 @@ app.use(express.json());
 app.use(cors());
 
 // Health check endpoint
-app.get("/health", (_req: Request, res: Response) => {
+app.get("/api/health", (_req: Request, res: Response) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+async function scrapeTrends(): Promise<string[]> {
+  const cacheKey = 'trends_us';
+  const cacheTTL = 900000; // 15 minutes
+
+  const cachedTrends = getCachedData(cacheKey, cacheTTL);
+  if (cachedTrends) {
+    console.log('Returning cached trends data');
+    return cachedTrends;
+  }
+
+  try {
+    console.log('Scraping fresh trends data from Trends24...');
+    const url = "https://trends24.in/united-states/";
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+      'Accept-Language': 'en-US,en;q=0.5',
+    };
+
+    const response = await axios.get(url, { headers, timeout: 15000 });
+    const $ = cheerio.load(response.data);
+
+    const trendLinks: string[] = [];
+    $("span.trend-name a.trend-link").each((_, el) => {
+      const trend = $(el).text().trim();
+      if (trend && trend.length > 0) {
+        trendLinks.push(trend);
+      }
+    });
+
+    const trends = trendLinks.slice(0, 50);
+    console.log(`Scraped ${trends.length} trends from Trends24`);
+
+    saveCachedData(cacheKey, trends);
+
+    return trends;
+  } catch (error) {
+    console.error("Error scraping trends from Trends24:", error);
+    if (error instanceof Error) {
+      console.error('Error details:', error.message);
+    }
+    return [];
+  }
+}
+
+app.get("/api/trends", async (_req: Request, res: Response) => {
+  try {
+    const cachedTrends = getCachedData('trends_us');
+    if (cachedTrends) {
+      return res.json(cachedTrends.slice(0, 25));
+    }
+
+    const topics = await scrapeTrends();
+    res.json(topics.slice(0, 25));
+  } catch (err) {
+    console.error("/api/trends error:", err);
+    res.status(500).json({ error: "Failed to fetch trends" });
+  }
 });
 
 const PORT = process.env.PORT || 3000;
