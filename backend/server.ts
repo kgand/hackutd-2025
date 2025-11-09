@@ -379,6 +379,22 @@ app.get("/api/sentiment/all", async (_req: Request, res: Response) => {
   }
 });
 
+app.get("/api/downdetector", async (_req: Request, res: Response) => {
+  try {
+    const downdetectorFile = path.join(CACHE_DIR, 'downdetector.json');
+
+    if (!fs.existsSync(downdetectorFile)) {
+      return res.status(404).json({ error: "DownDetector data not available" });
+    }
+
+    const downDetectorData = JSON.parse(fs.readFileSync(downdetectorFile, 'utf-8'));
+    res.json(downDetectorData);
+  } catch (err) {
+    console.error("Error fetching DownDetector data:", err);
+    res.status(500).json({ error: "Failed to fetch DownDetector data" });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
