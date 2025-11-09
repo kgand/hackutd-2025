@@ -1,6 +1,8 @@
 flask
 flask-cors
 requests
+torch
+transformers
 beautifulsoup4
 apify-client
 python-dotenv

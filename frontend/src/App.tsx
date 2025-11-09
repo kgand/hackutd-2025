@@ -13,17 +13,17 @@ const App: React.FC = () => {
   const [viewOpacity, setViewOpacity] = useState(1);
 
   const handleNavigate = (view: 'map' | 'graph', city?: string, topic?: string) => {
-    // Fade out
+
     setIsTransitioning(true);
     setViewOpacity(0);
 
-    // Change view after fade
+
     setTimeout(() => {
       setSelectedCity(city);
       setSelectedTopic(topic);
       setActiveView(view);
 
-      // Fade in
+
       setTimeout(() => {
         setViewOpacity(1);
         setTimeout(() => setIsTransitioning(false), 600);
@@ -32,17 +32,17 @@ const App: React.FC = () => {
   };
 
   const handleBackToLanding = () => {
-    // Fade out
+
     setIsTransitioning(true);
     setViewOpacity(0);
 
-    // Return to landing
+
     setTimeout(() => {
       setActiveView("landing");
       setSelectedCity(undefined);
       setSelectedTopic(undefined);
 
-      // Fade in
+
       setTimeout(() => {
         setViewOpacity(1);
         setTimeout(() => setIsTransitioning(false), 600);
@@ -50,7 +50,7 @@ const App: React.FC = () => {
     }, 400);
   };
 
-  // Switch between map/graph views
+
   const handleViewSwitch = (view: ViewMode) => {
     if (view === activeView) return;
 
@@ -68,7 +68,7 @@ const App: React.FC = () => {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-gradient-to-b from-gray-800 to-black">
-      {/* Navigation Bar */}
+      {}
       {activeView !== "landing" && (
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 flex gap-2 bg-black/30 backdrop-blur-lg rounded-xl p-1 border border-white/20">
           <button
@@ -102,7 +102,7 @@ const App: React.FC = () => {
         </div>
       )}
 
-      {/* Main View */}
+      {}
       <div
         className="transition-opacity duration-500 ease-in-out"
         style={{ opacity: viewOpacity }}
@@ -112,7 +112,7 @@ const App: React.FC = () => {
         {activeView === "graph" && <GraphView initialTopic={selectedTopic} />}
       </div>
 
-      {/* Transition Effect */}
+      {}
       {isTransitioning && (
         <div className="absolute inset-0 z-20 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-[#E20074]/10 via-[#FF00A0]/10 to-[#FF1493]/10 animate-pulse" />

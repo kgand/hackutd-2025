@@ -192,7 +192,7 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
     return (
     <div className="bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-900 min-h-screen flex items-center justify-center p-3">
       <div className="flex flex-col md:flex-row items-stretch md:items-stretch justify-center gap-4 w-full">
-        {/* Left sidebar: clusters */}
+        {}
         <div className="w-[min(36vw,360px)]  h-[min(96vh,960px)] flex flex-col gap-4 min-h-0">
           <GlassCard className="flex-1 min-h-0">
             <div className="p-4 flex flex-col gap-3 h-full no-scrollbar overflow-auto">
@@ -236,9 +236,8 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
           </GlassCard>
         </div>
 
-                {/* Center: graph + outage monitor */}
                 <div className="flex-1 flex-col items-center justify-center ">
-                    {/* Center column */}
+                    {}
                     <div className="w-[min(60vw,1020px)] h-[min(96vh,960px)] flex flex-col gap-4">
                         <GlassCard className="flex-[3] min-h-0 overflow-hidden">
                             {error ? (
@@ -292,7 +291,7 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                     </div>
                 </div>
 
-        {/* Right panel: details */}
+        {}
         <GlassCard className="w-[min(36vw,500px)] h-[min(96vh,960px)] min-h-0 overflow-hidden flex flex-col">
           <div className="p-4 space-y-4 h-full overflow-auto no-scrollbar">
             {!focusedNode ? (

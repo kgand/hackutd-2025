@@ -31,7 +31,7 @@ const Landing: React.FC<LandingProps> = ({ onNavigate }) => {
   return (
     <div className="app-container" onMouseMove={handleMouseMove}>
       {isLoading && <LoadingScreen />}
-      {/* Galaxy Background */}
+      {}
       <div className="galaxy-background">
         <Galaxy
           focal={galaxyFocal}
@@ -50,7 +50,7 @@ const Landing: React.FC<LandingProps> = ({ onNavigate }) => {
         />
       </div>
 
-      {/* Vignette Overlay */}
+      {}
       <Vignette />
       <div className="content-container">
         <motion.header

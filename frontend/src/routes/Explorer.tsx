@@ -4,6 +4,7 @@ import SimpleMap from '../components/SimpleMap';
 import Sidebar from '../components/Sidebar';
 import HoverInfoPanel from '../components/HoverInfoPanel';
 import SearchBar from '../components/SearchBar';
+import InsightsPanel from '../components/InsightsPanel';
 import '../App.css';
 
 
@@ -97,6 +98,7 @@ const Explorer: React.FC<ExplorerProps> = ({ initialCity }) => {
           curve: 1.5
         }),
         transitionEasing: (t: number) => {
+
           return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
         }
       }));
@@ -396,6 +398,7 @@ const handleTopicSelect = useCallback((topic: string | null) => {
 
 
   useEffect(() => {
+
     if (initialCity && currentData.length > 0 && !hasInitializedCity) {
 
       const cityTweet = currentData.find(
@@ -448,14 +451,14 @@ const handleTopicSelect = useCallback((topic: string | null) => {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-gradient-to-b from-black via-[#1a0010] to-black" style={{ fontFamily: 'Inter, sans-serif' }}>
-        {/* Loading indicator */}
+        {}
         {isLoading && (
           <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 bg-[#E20074]/20 backdrop-blur-lg text-white px-6 py-3 rounded-xl border border-[#E20074]/40 shadow-lg shadow-[#E20074]/20 font-light tracking-wide">
             Loading {selectedTopic ? `"${selectedTopic}"` : 'all'} data...
           </div>
         )}
 
-      {/* Map container with fade effect */}
+      {}
       <div
         className="absolute inset-0 z-0 transition-opacity duration-500 ease-in-out"
         style={{ opacity: mapOpacity }}
@@ -476,7 +479,7 @@ const handleTopicSelect = useCallback((topic: string | null) => {
         />
       </div>
 
-      {/* Transition overlay */}
+      {}
       {isTransitioning && (
         <div className="absolute inset-0 z-5 pointer-events-none">
           <div className="absolute inset-0 bg-gradient-to-r from-[#E20074]/5 via-[#FF00A0]/5 to-[#FF1493]/5 animate-pulse" />
@@ -484,7 +487,7 @@ const handleTopicSelect = useCallback((topic: string | null) => {
         </div>
       )}
 
-      {/* UI Overlays */}
+      {}
       <div className="relative z-10 flex h-full w-full pointer-events-none">
         <div className="pointer-events-auto">
           <Sidebar
@@ -493,21 +496,27 @@ const handleTopicSelect = useCallback((topic: string | null) => {
           />
         </div>
 
-        {/* Middle spacer */}
+        {}
         <div className="flex-1"></div>
 
-        {/* Right panel */}
-        <div className="pointer-events-auto mr-4 mt-4">
+        {}
+        <div className="pointer-events-auto mr-4 mt-4 flex flex-col gap-4">
           <HoverInfoPanel className="w-64" hoverInfo={hoverInfo} />
+          <InsightsPanel
+            className="w-64"
+            topic={selectedTopic}
+            currentData={currentData}
+            hoveredTweets={hoverInfo?.tweets}
+          />
         </div>
       </div>
 
-      {/* Search bar at bottom */}
+      {}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-1/3">
         <SearchBar onLocationSelect={handleLocationSelect} />
       </div>
 
-      {/* Initial loading overlay with fade */}
+      {}
       <div
         className="absolute inset-0 transition-opacity duration-1000 ease-out pointer-events-none bg-black"
         style={{
@@ -515,7 +524,7 @@ const handleTopicSelect = useCallback((topic: string | null) => {
           zIndex: 25
         }}
       >
-        {/* Loading text */}
+        {}
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="title" style={{ fontSize: '3rem', textTransform: 'lowercase' }}>
             scraping tweets

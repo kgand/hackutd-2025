@@ -135,7 +135,7 @@ const OutageMonitor: React.FC = () => {
       </CardHeader>
       <CardContent className="h-[calc(100%-5rem)] pb-4">
         <div className="w-full h-full flex gap-3">
-          {/* Y-axis */}
+          {}
           <div className="flex flex-col justify-between text-[11px] text-white/50 font-mono font-medium pt-2 pb-8">
             {yAxisValues.map((value, i) => (
               <div key={i} className="text-right pr-3 leading-none" style={{ minWidth: '40px' }}>
@@ -144,11 +144,11 @@ const OutageMonitor: React.FC = () => {
             ))}
           </div>
 
-          {/* Chart area */}
+          {}
           <div className="flex-1 flex flex-col min-w-0">
-            {/* Chart container */}
+            {}
             <div className="flex-1 relative border-l-2 border-b-2 border-white/20 rounded-bl-sm" style={{ minHeight: 0 }}>
-              {/* Grid lines */}
+              {}
               {yAxisValues.map((_, i) => (
                 <div
                   key={i}
@@ -160,7 +160,7 @@ const OutageMonitor: React.FC = () => {
                 />
               ))}
 
-              {/* Chart SVG */}
+              {}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
@@ -170,7 +170,7 @@ const OutageMonitor: React.FC = () => {
                   </linearGradient>
                 </defs>
 
-                {/* Area fill */}
+                {}
                 <path
                   d={(() => {
                     if (chartData.length === 0) return '';
@@ -186,7 +186,7 @@ const OutageMonitor: React.FC = () => {
                   fill="url(#chartGradient)"
                 />
 
-                {/* Line */}
+                {}
                 <polyline
                   points={chartData.map((point, i) => {
                     const x = chartData.length === 1 ? 50 : (i / (chartData.length - 1)) * 100;
@@ -203,7 +203,7 @@ const OutageMonitor: React.FC = () => {
                 />
               </svg>
 
-              {/* Data points */}
+              {}
               <svg className="absolute inset-0 w-full h-full pointer-events-none">
                 <defs>
                   <radialGradient id="pointGradient" cx="50%" cy="50%" r="50%">
@@ -235,7 +235,7 @@ const OutageMonitor: React.FC = () => {
                 })}
               </svg>
 
-              {/* Hover tooltips */}
+              {}
               <div className="absolute inset-0 flex">
                 {chartData.map((point, i) => (
                   <div key={i} className="flex-1 group relative">
@@ -255,7 +255,7 @@ const OutageMonitor: React.FC = () => {
               </div>
             </div>
 
-            {/* X-axis labels */}
+            {}
             <div className="flex justify-between pt-2 text-[10px] text-white/50 font-mono font-medium">
               {chartData.map((point, i) => (
                 <div key={i} className="flex-1 text-center leading-none">
@@ -266,7 +266,7 @@ const OutageMonitor: React.FC = () => {
           </div>
         </div>
 
-        {/* Legend */}
+        {}
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">

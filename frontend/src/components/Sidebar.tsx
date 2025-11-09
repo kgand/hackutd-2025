@@ -75,7 +75,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
         className
       )}
     >
-      {/* Header */}
+      {}
       <div className={cn(
         "flex items-center border-b border-gray-300/20 p-4",
         collapsed ? "justify-center" : "justify-between"
@@ -114,7 +114,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
         </button>
       </div>
 
-      {/* Sidebar content */}
+      {}
       <div className="flex-1 overflow-auto no-scrollbar">
         {!collapsed && (
           <div
@@ -123,7 +123,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
               contentVisible ? "opacity-100" : "opacity-0"
             )}
           >
-            {/* Show All Topics button */}
+            {}
             <Button
               variant="ghost"
               className={cn(
@@ -145,7 +145,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
               <span className="truncate">show all topics</span>
             </Button>
 
-            {/* Individual trend buttons */}
+            {}
             {trends.length > 0 ? (
               <div className="flex flex-col gap-2">
                 {trends.map((trend, index) => (
@@ -171,7 +171,7 @@ export function Sidebar({ className, onTopicSelect }: SidebarProps) {
           </div>
         )}
 
-        {/* Collapsed sidebar: Show numbered buttons */}
+        {}
         {collapsed && (
           <div className="flex flex-col items-center gap-3 mt-4">
             {trends.slice(0, 5).map((trend, index) => (

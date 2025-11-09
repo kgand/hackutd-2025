@@ -1,3 +1,4 @@
+
 import os
 import json
 import time
@@ -10,18 +11,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Configuration
+
 CACHE_DIR = Path("cache")
 APIFY_TOKEN = os.getenv("apify_token")
 APIFY_ACTOR = os.getenv("apify_actor", "apify/twitter-scraper")
 PYTHON_API_URL = "http://localhost:5000/extract-location"
 
-# Ensure cache directory exists
+
 CACHE_DIR.mkdir(exist_ok=True)
 
 
 class TwitterScraper:
-    """Scrapes Twitter data using Apify API"""
 
     def __init__(self, apify_token: str = None, actor_id: str = None):
         self.token = apify_token or APIFY_TOKEN
@@ -39,15 +39,14 @@ class TwitterScraper:
         max_items: int = 100,
         since_hours: int = 24
     ) -> List[Dict[str, Any]]:
-        """Scrape tweets using Apify Twitter Scraper"""
         print(f"[TwitterScraper] Scraping tweets for: {search_terms}")
         print(f"[TwitterScraper] Max items: {max_items}, Since: {since_hours}h ago")
 
-        # Calculate since timestamp
+
         since_time = datetime.utcnow() - timedelta(hours=since_hours)
         since_timestamp = int(since_time.timestamp() * 1000)
 
-        # Configure run input
+
         run_input = {
             "searchTerms": search_terms,
             "maxItems": max_items,
@@ -57,21 +56,24 @@ class TwitterScraper:
             "onlyTwitterBlue": False,
         }
 
+
         if since_hours < 168:
             run_input["since_time"] = since_timestamp
 
         try:
+
             print(f"[TwitterScraper] Starting Apify actor run...")
             run = self.client.actor(self.actor_id).call(run_input=run_input)
 
             print(f"[TwitterScraper] Actor run completed: {run['id']}")
             print(f"[TwitterScraper] Status: {run['status']}")
 
-            # Fetch results from dataset
+
             dataset_id = run["defaultDatasetId"]
             items = []
 
             print(f"[TwitterScraper] Fetching results from dataset: {dataset_id}")
+
 
             for item in self.client.dataset(dataset_id).iterate_items():
                 items.append(item)
@@ -84,11 +86,10 @@ class TwitterScraper:
             raise
 
     def extract_tweet_text(self, tweet: Dict[str, Any]) -> str:
-        """Extract text from tweet object"""
+
         return tweet.get("text") or tweet.get("full_text") or tweet.get("content") or ""
 
     def find_location_fields(self, obj: Any, path: str = "") -> List[tuple]:
-        """Recursively find location-related fields in tweet data"""
         location_keywords = {
             'location', 'place', 'city', 'state', 'country', 'address',
             'geo', 'coordinates', 'lat', 'lon', 'latitude', 'longitude',
@@ -101,11 +102,11 @@ class TwitterScraper:
             for key, value in obj.items():
                 new_path = f"{path}.{key}" if path else key
 
-                # Check if this key is location-related
+
                 if key.lower() in location_keywords and value:
                     results.append((new_path, value))
 
-                # Recurse into nested objects
+
                 results.extend(self.find_location_fields(value, new_path))
 
         elif isinstance(obj, list):
@@ -120,7 +121,7 @@ class TwitterScraper:
         tweet_text: str,
         location_fields: List[tuple]
     ) -> Optional[Dict[str, Any]]:
-        """Extract location from tweet using external API"""
+
         location_values = [str(value) for path, value in location_fields if value]
         location_context = ", ".join(location_values) if location_values else ""
 
@@ -147,22 +148,21 @@ class TwitterScraper:
         tweets: List[Dict[str, Any]],
         extract_locations: bool = True
     ) -> List[Dict[str, Any]]:
-        """Process raw tweets and extract location data"""
         processed = []
 
         for i, tweet in enumerate(tweets):
             try:
-                # Extract basic tweet info
+
                 tweet_id = tweet.get("id") or tweet.get("id_str") or f"tweet_{i}"
                 text = self.extract_tweet_text(tweet)
                 created_at = tweet.get("createdAt") or tweet.get("created_at")
 
-                # Extract author info
+
                 author = tweet.get("author") or tweet.get("user") or {}
                 author_name = author.get("name") or author.get("userName") or "Unknown"
                 author_username = author.get("userName") or author.get("screen_name") or "unknown"
 
-                # Build processed tweet
+
                 processed_tweet = {
                     "id": str(tweet_id),
                     "text": text,
@@ -173,21 +173,23 @@ class TwitterScraper:
                     }
                 }
 
-                # Extract location if requested
+
                 if extract_locations and text:
                     location_fields = self.find_location_fields(tweet)
 
                     if location_fields or text:
+
                         location_result = self.extract_location_via_api(text, location_fields)
 
                         if location_result and location_result.get("coordinates"):
                             coords = location_result["coordinates"]
                             extracted_loc = location_result.get("extracted_location", "Unknown")
 
+
                             if coords and len(coords) == 2:
                                 lat, lon = coords
 
-                                # Parse location string
+
                                 location_parts = extracted_loc.split(",")
                                 city = location_parts[0].strip() if len(location_parts) > 0 else "Unknown"
                                 state = location_parts[1].strip() if len(location_parts) > 1 else ""
@@ -202,7 +204,7 @@ class TwitterScraper:
 
                 processed.append(processed_tweet)
 
-                # Progress logging
+
                 if (i + 1) % 10 == 0:
                     print(f"[TwitterScraper] Processed {i + 1}/{len(tweets)} tweets")
 
@@ -214,7 +216,6 @@ class TwitterScraper:
         return processed
 
     def save_to_cache(self, cache_key: str, data: Any) -> None:
-        """Save data to cache file"""
         try:
             cache_file = CACHE_DIR / f"{cache_key}.json"
             with open(cache_file, "w", encoding="utf-8") as f:
@@ -224,7 +225,6 @@ class TwitterScraper:
             print(f"[TwitterScraper] Error saving cache: {e}")
 
     def load_from_cache(self, cache_key: str) -> Optional[Any]:
-        """Load data from cache file"""
         try:
             cache_file = CACHE_DIR / f"{cache_key}.json"
             if not cache_file.exists():
@@ -244,16 +244,15 @@ class TwitterScraper:
         max_items: int = 100,
         force_refresh: bool = False
     ) -> List[Dict[str, Any]]:
-        """Scrape tweets for a topic with caching"""
         cache_key = f"tweets_{topic.replace(' ', '_')}"
 
-        # Check cache first
+
         if not force_refresh:
             cached = self.load_from_cache(cache_key)
             if cached:
                 return cached
 
-        # Scrape fresh data
+
         print(f"\n{'='*60}")
         print(f"Scraping topic: {topic}")
         print(f"{'='*60}")
@@ -268,10 +267,10 @@ class TwitterScraper:
             print(f"[TwitterScraper] No tweets found for topic: {topic}")
             return []
 
-        # Process tweets
+
         processed = self.process_tweets(raw_tweets, extract_locations=True)
 
-        # Save to cache
+
         self.save_to_cache(cache_key, processed)
 
         return processed
@@ -282,7 +281,6 @@ def scrape_topics_from_list(
     max_items_per_topic: int = 50,
     force_refresh: bool = False
 ) -> Dict[str, List[Dict[str, Any]]]:
-    """Scrape multiple topics with caching"""
     scraper = TwitterScraper()
     results = {}
 
@@ -295,7 +293,7 @@ def scrape_topics_from_list(
             )
             results[topic] = tweets
 
-            # Rate limiting
+
             time.sleep(2)
 
         except Exception as e:
@@ -306,5 +304,55 @@ def scrape_topics_from_list(
 
 
 if __name__ == "__main__":
-    print("Twitter Scraper Module")
-    print("Initialization complete")
+    import sys
+
+    print("Twitter Scraper Test")
+    print("=" * 60)
+
+
+    test_topic = "T-Mobile 5G"
+    cache_key = f"tweets_{test_topic.replace(' ', '_')}"
+    cache_file = CACHE_DIR / f"{cache_key}.json"
+
+
+    if cache_file.exists() and "--force" not in sys.argv:
+        print(f"\nCache exists for '{test_topic}'")
+        print(f"Cache file: {cache_file}")
+
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                cached_tweets = json.load(f)
+            print(f"Cached tweets: {len(cached_tweets)}")
+            print("\nTo scrape fresh data, run: python twitter_generator.py --force")
+        except Exception as e:
+            print(f"Error reading cache: {e}")
+
+        sys.exit(0)
+
+    print(f"\nScraping fresh data for '{test_topic}'...")
+    print("(This requires Apify token and location API running)")
+
+    try:
+        scraper = TwitterScraper()
+        tweets = scraper.scrape_and_cache_topic(
+            test_topic,
+            max_items=20,
+            force_refresh=True
+        )
+
+        print(f"\n{'='*60}")
+        print(f"Results for '{test_topic}':")
+        print(f"Total tweets: {len(tweets)}")
+
+        if tweets:
+            print(f"\nSample tweet:")
+            sample = tweets[0]
+            print(f"  ID: {sample.get('id')}")
+            print(f"  Text: {sample.get('text', '')[:100]}...")
+            print(f"  Author: {sample.get('author', {}).get('name')}")
+            if 'location' in sample:
+                loc = sample['location']
+                print(f"  Location: {loc.get('city')}, {loc.get('state')} ({loc.get('coordinates')})")
+
+    except Exception as e:
+        print(f"\nError during test: {e}")

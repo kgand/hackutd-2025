@@ -27,7 +27,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* T-Mobile Brand Colors */
+  
   --tmobile-magenta: #E20074;
   --tmobile-magenta-dark: #9B006B;
   --tmobile-magenta-light: #FF00A0;
@@ -63,7 +63,7 @@ html, #root {
   text-transform: lowercase;
 }
 
-/* Font smoothing for all elements */
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -187,7 +187,7 @@ html, #root {
   }
 }
 
-/* Custom scrollbar styling */
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

@@ -8,7 +8,12 @@
     "dev": "tsx watch server.ts",
     "start": "tsx server.ts",
     "scrape": "python data_orchestrator.py",
-    "scrape:force": "python data_orchestrator.py --force-refresh"
+    "scrape:force": "python data_orchestrator.py --force-refresh",
+    "scrape:light": "python data_orchestrator.py --force-refresh --max-tweets 20",
+    "scrape:full": "python data_orchestrator.py --force-refresh --max-tweets 100",
+    "scrape:trends": "python data_orchestrator.py --force-refresh --real-trends",
+    "test:twitter": "python twitter_generator.py",
+    "test:downdetector": "python downdetector_scraper.py"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",

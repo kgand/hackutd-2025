@@ -1,3 +1,4 @@
+
 import requests
 from bs4 import BeautifulSoup
 import json
@@ -5,7 +6,7 @@ from pathlib import Path
 from typing import Dict, Optional
 import time
 
-# Configuration
+
 CACHE_DIR = Path("cache")
 CACHE_FILE = CACHE_DIR / "downdetector.json"
 DOWNDETECTOR_URL = "https://downdetector.com/status/t-mobile"
@@ -13,7 +14,6 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 
 def load_cached_data() -> Optional[Dict]:
-    """Load cached DownDetector data"""
     if not CACHE_FILE.exists():
         print("[DownDetector] No cache file found")
         return None
@@ -29,7 +29,6 @@ def load_cached_data() -> Optional[Dict]:
 
 
 def save_to_cache(data: Dict) -> None:
-    """Save DownDetector data to cache"""
     try:
         CACHE_DIR.mkdir(exist_ok=True)
         with open(CACHE_FILE, "w", encoding="utf-8") as f:
@@ -40,7 +39,6 @@ def save_to_cache(data: Dict) -> None:
 
 
 def scrape_downdetector() -> Optional[Dict]:
-    """Scrape T-Mobile status from DownDetector"""
     print(f"[DownDetector] Scraping {DOWNDETECTOR_URL}")
     
     headers = {
@@ -58,7 +56,7 @@ def scrape_downdetector() -> Optional[Dict]:
         
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Extract logo
+
         logo = None
         logo_img = soup.select_one(".img-fluid")
         if logo_img and logo_img.get("src"):
@@ -66,13 +64,13 @@ def scrape_downdetector() -> Optional[Dict]:
             if logo.startswith("//"):
                 logo = "https:" + logo
         
-        # Extract URL
+
         url = None
         company_link = soup.select_one("#company-status a")
         if company_link and company_link.get("href"):
             url = company_link["href"]
         
-        # Extract problem percentages
+
         problems = {"app": "0", "website": "0", "server": "0"}
         problem_elements = soup.select(".indicatorChart_percentage")
         if len(problem_elements) >= 3:
@@ -80,7 +78,7 @@ def scrape_downdetector() -> Optional[Dict]:
             problems["website"] = problem_elements[1].get_text(strip=True).replace("%", "")
             problems["server"] = problem_elements[2].get_text(strip=True).replace("%", "")
         
-        # Extract comments
+
         comments = {}
         comment_divs = soup.select("#comments-card div[style*='margin-left:65px']")
         for index, elem in enumerate(comment_divs):
@@ -94,7 +92,7 @@ def scrape_downdetector() -> Optional[Dict]:
                     date = date_elem.get_text(strip=True)
                     comment_text = comment_elem.get_text(strip=True)
                     
-                    # Remove username from comment if it starts with it
+
                     if comment_text.startswith(user):
                         comment_text = comment_text[len(user):].strip()
                     
@@ -107,13 +105,26 @@ def scrape_downdetector() -> Optional[Dict]:
                 print(f"[DownDetector] Error parsing comment {index}: {e}")
                 continue
         
-        # Build result
+
+        chart_data = {"data": None, "baseline": None}
+        script_tags = soup.find_all("script")
+        for script in script_tags:
+            script_content = script.string
+            if script_content and "window.DD.chartTranslations" in script_content:
+                try:
+
+
+
+                    pass
+                except Exception as e:
+                    print(f"[DownDetector] Error parsing chart data: {e}")
+        
         result = {
             "logo": logo,
             "url": url,
             "problems": problems,
             "comments": comments,
-            "chart": {"data": None, "baseline": None},
+            "chart": chart_data,
             "scraped_at": time.strftime("%Y-%m-%d %H:%M:%S")
         }
         
@@ -129,24 +140,55 @@ def scrape_downdetector() -> Optional[Dict]:
 
 
 def get_downdetector_data(force_refresh: bool = False) -> Optional[Dict]:
-    """Get DownDetector data with caching"""
-    # Check cache first
+
     if not force_refresh:
         cached_data = load_cached_data()
         if cached_data:
             return cached_data
     
-    # Scrape fresh data
+
     print("[DownDetector] Cache miss, scraping fresh data...")
-    data = scrape_downdetector()
+    scraped_data = scrape_downdetector()
     
-    if data:
-        save_to_cache(data)
+    if scraped_data:
+        save_to_cache(scraped_data)
+        return scraped_data
     
-    return data
+
+    if force_refresh:
+        print("[DownDetector] Scraping failed, attempting to use stale cache...")
+        return load_cached_data()
+    
+    return None
 
 
 if __name__ == "__main__":
-    print("DownDetector Scraper Module")
-    print(f"Target URL: {DOWNDETECTOR_URL}")
-    print(f"Cache directory: {CACHE_DIR}")
+    import sys
+
+    print("Testing DownDetector scraper...")
+    print("=" * 60)
+
+
+    if CACHE_FILE.exists() and "--force" not in sys.argv:
+        print(f"\nCache exists: {CACHE_FILE}")
+
+        cached_data = load_cached_data()
+        if cached_data:
+            print(f"- Logo: {cached_data.get('logo', 'N/A')}")
+            print(f"- URL: {cached_data.get('url', 'N/A')}")
+            print(f"- Problems: {cached_data.get('problems', {})}")
+            print(f"- Comments: {len(cached_data.get('comments', {}))} total")
+            print(f"- Scraped at: {cached_data.get('scraped_at', 'N/A')}")
+            print("\nTo scrape fresh data, run: python downdetector_scraper.py --force")
+        sys.exit(0)
+
+    print("\nScraping fresh DownDetector data...")
+    data = get_downdetector_data(force_refresh=True)
+    if data:
+        print(f"\nSuccess! Retrieved data:")
+        print(f"- Logo: {data.get('logo', 'N/A')}")
+        print(f"- URL: {data.get('url', 'N/A')}")
+        print(f"- Problems: {data.get('problems', {})}")
+        print(f"- Comments: {len(data.get('comments', {}))} total")
+    else:
+        print("Failed to retrieve data")

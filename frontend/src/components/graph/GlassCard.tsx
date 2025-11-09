@@ -35,7 +35,7 @@ export default function GlassCard({ className = "", children }: GlassCardProps) 
           ].join(" ")}
         />
 
-        {/* Content */}
+        {}
         <div className="relative z-10 h-full w-full text-white/90">
           {children}
         </div>
