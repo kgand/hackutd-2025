@@ -16,6 +16,12 @@ import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+// Cache fallback: use cache/ folder when RENDER env var is not set
+const USE_CACHE_ONLY = !process.env.RENDER;
+if (USE_CACHE_ONLY) {
+  console.log('⚡ Cache-only mode enabled (local development)');
+  console.log('   Set RENDER=true environment variable to enable live data fetching\n');
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -459,13 +465,13 @@ async function reconcileWatchers(newTopics: string[]) {
 
 app.get("/api/trends", async (_req: Request, res: Response) => {
   try {
-
+    // Always use cache in local development mode
     const cachedTrends = getCachedData('trends_us');
-    if (cachedTrends) {
-      return res.json(cachedTrends.slice(0, 25));
+    if (cachedTrends || USE_CACHE_ONLY) {
+      return res.json((cachedTrends || []).slice(0, 25));
     }
 
-
+    // Only scrape live data in production (Render)
     const topics = await scrapeTrends();
     res.json(topics.slice(0,25));
   } catch (error) {
@@ -557,13 +563,14 @@ app.get("/api/flattened/:topic", async (req: Request, res: Response) => {
 
 app.get("/api/flattened", async (_req: Request, res: Response) => {
   try {
-
+    // Always use cache in local development mode
     const cachedTrends = getCachedData('trends_us');
-    if (cachedTrends && Array.isArray(cachedTrends)) {
+    if ((cachedTrends && Array.isArray(cachedTrends)) || USE_CACHE_ONLY) {
       let allTweets: any[] = [];
 
-
-      for (const topic of cachedTrends) {
+      // Get topics from cache or use empty array
+      const topics = cachedTrends || [];
+      for (const topic of topics) {
         const cacheKey = `tweets_${topic}`;
         const cachedTopicTweets = getCachedData(cacheKey);
 
@@ -581,7 +588,7 @@ app.get("/api/flattened", async (_req: Request, res: Response) => {
         }
       }
 
-
+      // Filter for valid coordinates
       const filtered = allTweets.filter(item => {
         return typeof item.lat === 'number' && typeof item.lon === 'number' &&
                !isNaN(item.lat) && !isNaN(item.lon) &&
@@ -593,7 +600,7 @@ app.get("/api/flattened", async (_req: Request, res: Response) => {
       return res.json(filtered);
     }
 
-
+    // Only query database in production (Render)
     if (!supabase) return res.status(500).json({ error: "Database not connected"});
 
     const { data: rows, error } = await supabase
@@ -613,7 +620,7 @@ app.get("/api/flattened", async (_req: Request, res: Response) => {
 
       return { topic, lon, lat, text, author, location };
     }).filter(item => {
-
+      // Filter for valid coordinates
       return typeof item.lat === 'number' && typeof item.lon === 'number' &&
              !isNaN(item.lat) && !isNaN(item.lon) &&
              item.lat !== 0 && item.lon !== 0 &&
@@ -661,14 +668,14 @@ async function init() {
 
         const cachedTrends = getCachedData('trends_us');
 
-        if (cachedTrends && Array.isArray(cachedTrends) && cachedTrends.length > 0) {
+        if ((cachedTrends && Array.isArray(cachedTrends) && cachedTrends.length > 0) || USE_CACHE_ONLY) {
             console.log('\nCACHE MODE: Using pre-generated data');
             console.log('='.repeat(70));
-            console.log(`Topics loaded: ${cachedTrends.length}`);
+            console.log(`Topics loaded: ${(cachedTrends || []).length}`);
 
             let totalTweets = 0;
             let topicsWithData = 0;
-            for (const topic of cachedTrends) {
+            for (const topic of (cachedTrends || [])) {
                 const tweets = getCachedData(`tweets_${topic}`);
                 if (tweets && Array.isArray(tweets)) {
                     totalTweets += tweets.length;
@@ -689,7 +696,12 @@ async function init() {
             }
 
             console.log('\nBackend ready!');
-            console.log('To refresh data: npm run scrape:force');
+            if (USE_CACHE_ONLY) {
+                console.log('💡 Local development mode - using cached data');
+                console.log('   Set RENDER=true to enable live data fetching');
+            } else {
+                console.log('To refresh data: npm run scrape:force');
+            }
             console.log('='.repeat(70) + '\n');
             return;
         }
@@ -715,7 +727,13 @@ async function init() {
         console.error('  1. Run: npm run scrape');
         console.error('  2. Restart server: npm run dev');
         console.error('\nOr configure Supabase credentials in .env file');
-        process.exit(1);
+        
+        // Don't exit if in cache-only mode
+        if (!USE_CACHE_ONLY) {
+            process.exit(1);
+        } else {
+            console.log('\n⚠️  Continuing in cache-only mode...\n');
+        }
     }
 }
 

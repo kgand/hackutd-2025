@@ -4,31 +4,34 @@ Real-time T-Mobile sentiment analysis platform combining social media scraping, 
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        Frontend (React)                      │
-│  ┌────────────┐  ┌────────────┐  ┌────────────┐            │
-│  │  Landing   │  │  Explorer  │  │ GraphView  │            │
-│  │  (WebGL)   │  │ (Deck.gl)  │  │   (D3.js)  │            │
-│  └────────────┘  └────────────┘  └────────────┘            │
-└─────────────────────────────────────────────────────────────┘
-                          │ HTTP/REST
-┌─────────────────────────────────────────────────────────────┐
-│                    Backend (Express + Python)                │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │  API Server  │  │  Twitter     │  │DownDetector  │      │
-│  │  (Node.js)   │  │  Scraper     │  │   Scraper    │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-│         │                  │                  │              │
-│         └──────────────────┴──────────────────┘              │
-│                          │                                   │
-│         ┌────────────────┴────────────────┐                 │
-│         │                                  │                 │
-│    ┌────▼─────┐                     ┌─────▼──────┐          │
-│    │ Supabase │                     │   Gemini   │          │
-│    │   (DB)   │                     │     AI     │          │
-│    └──────────┘                     └────────────┘          │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph Frontend["Frontend (React)"]
+        Landing["Landing<br/>(WebGL)"]
+        Explorer["Explorer<br/>(Deck.gl)"]
+        GraphView["GraphView<br/>(D3.js)"]
+    end
+    
+    subgraph Backend["Backend (Express + Python)"]
+        API["API Server<br/>(Node.js)"]
+        Twitter["Twitter<br/>Scraper"]
+        Down["DownDetector<br/>Scraper"]
+        
+        API --> Twitter
+        API --> Down
+    end
+    
+    DB[(Supabase<br/>DB)]
+    AI[Gemini<br/>AI]
+    
+    Frontend -->|HTTP/REST| Backend
+    Backend --> DB
+    Backend --> AI
+    
+    style Frontend fill:#1a1a2e
+    style Backend fill:#16213e
+    style DB fill:#0f3460
+    style AI fill:#533483
 ```
 
 ## Tech Stack
@@ -54,25 +57,24 @@ Real-time T-Mobile sentiment analysis platform combining social media scraping, 
 
 ## Data Flow
 
-```
-Twitter/DownDetector
-        │
-        ▼
-   Python Scrapers ──────┐
-        │                │
-        ▼                ▼
-    Cache (JSON)    Supabase DB
-        │                │
-        └────────┬───────┘
-                 ▼
-          Express API
-        ┌────────┴────────┐
-        ▼                 ▼
-   Map Endpoint      Graph Endpoint
-        │                 │
-        └────────┬────────┘
-                 ▼
-          React Frontend
+```mermaid
+graph LR
+    Sources[Twitter/DownDetector] --> Scrapers[Python Scrapers]
+    Scrapers --> Cache[Cache JSON]
+    Scrapers --> DB[(Supabase DB)]
+    Cache --> API[Express API]
+    DB --> API
+    API --> Map[Map Endpoint]
+    API --> Graph[Graph Endpoint]
+    Map --> Frontend[React Frontend]
+    Graph --> Frontend
+    
+    style Sources fill:#e20074
+    style Scrapers fill:#533483
+    style Cache fill:#0f3460
+    style DB fill:#0f3460
+    style API fill:#16213e
+    style Frontend fill:#1a1a2e
 ```
 
 ## Setup
@@ -109,6 +111,7 @@ npm install
 
 ### Run
 
+**Local Development:**
 ```bash
 # Terminal 1 - Backend
 cd backend
@@ -121,6 +124,31 @@ npm run dev
 
 Frontend: `http://localhost:5173`  
 Backend: `http://localhost:3000`
+
+**Production Deployment:**
+
+*Frontend (Vercel):*
+1. Push to GitHub
+2. Import repository in Vercel
+3. Set root directory: `frontend`
+4. Deploy automatically
+
+*Backend (Render):*
+1. Create new Web Service on [Render](https://render.com)
+2. Connect your GitHub repository
+3. Configure service:
+   - **Build Command**: `npm install && pip install -r requirements.txt`
+   - **Start Command**: `npx tsx server.ts`
+   - **Environment Variables**:
+     - `SUPABASE_URL`
+     - `SUPABASE_ANON_KEY`
+     - `APIFY_API_TOKEN`
+     - `GEMINI_API_KEY`
+     - `PORT` (default: 3000)
+     - `RENDER=true` (enables live data fetching)
+4. Deploy from `main` branch
+
+> **Note**: Without the `RENDER` environment variable, the backend will use cached data from the `cache/` folder for local development.
 
 ## API Endpoints
 

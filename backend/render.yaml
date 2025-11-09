@@ -1,0 +1,6 @@
+build:
+  - npm install
+  - pip install -r requirements.txt
+
+start:
+  - npx tsx server.ts
