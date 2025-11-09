@@ -1,0 +1,218 @@
+[
+  {
+    "id": "176266637359456500",
+    "text": "T-Mobile coverage: great in cities, spotty in rural areas. That's the reality",
+    "createdAt": "Fri, 07 Nov 2025 18:32:53 GMT",
+    "author": {
+      "userName": "LaurenMartin246",
+      "name": "Lauren Martin"
+    },
+    "location": {
+      "city": "San Antonio",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -98.4936,
+        29.4241
+      ]
+    }
+  },
+  {
+    "id": "176266637359426791",
+    "text": "The T-Mobile coverage in national parks is surprisingly good!",
+    "createdAt": "Sat, 08 Nov 2025 18:32:53 GMT",
+    "author": {
+      "userName": "brianlife",
+      "name": "Brian Miller"
+    },
+    "location": {
+      "city": "Dallas",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -96.797,
+        32.7767
+      ]
+    }
+  },
+  {
+    "id": "176266637359427782",
+    "text": "T-Mobile coverage map shows 5G but I'm only getting 4G in Charlotte",
+    "createdAt": "Sat, 08 Nov 2025 23:32:53 GMT",
+    "author": {
+      "userName": "kingd33",
+      "name": "Daniel King"
+    },
+    "location": {
+      "city": "Charlotte",
+      "state": "NC",
+      "country": "USA",
+      "coordinates": [
+        -80.8431,
+        35.2271
+      ]
+    }
+  },
+  {
+    "id": "17626663735943363",
+    "text": "Still have dead zones with T-Mobile coverage in my area. Frustrating",
+    "createdAt": "Sat, 08 Nov 2025 20:32:53 GMT",
+    "author": {
+      "userName": "harrisb98",
+      "name": "Brandon Harris"
+    },
+    "location": {
+      "city": "Philadelphia",
+      "state": "PA",
+      "country": "USA",
+      "coordinates": [
+        -75.1652,
+        39.9526
+      ]
+    }
+  },
+  {
+    "id": "176266637359435204",
+    "text": "The T-Mobile coverage in national parks is surprisingly good!",
+    "createdAt": "Fri, 07 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "daniel_garcia",
+      "name": "Daniel Robinson"
+    },
+    "location": {
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "USA",
+      "coordinates": [
+        -115.1398,
+        36.1699
+      ]
+    }
+  },
+  {
+    "id": "176266637359430365",
+    "text": "T-Mobile coverage map shows 5G but I'm only getting 4G in Las Vegas",
+    "createdAt": "Thu, 06 Nov 2025 17:32:53 GMT",
+    "author": {
+      "userName": "justin2024",
+      "name": "Justin Thompson"
+    },
+    "location": {
+      "city": "Las Vegas",
+      "state": "NV",
+      "country": "USA",
+      "coordinates": [
+        -115.1398,
+        36.1699
+      ]
+    }
+  },
+  {
+    "id": "176266637359423186",
+    "text": "T-Mobile coverage: great in cities, spotty in rural areas. That's the reality",
+    "createdAt": "Fri, 07 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "ryanofficial",
+      "name": "Ryan Young"
+    },
+    "location": {
+      "city": "Chicago",
+      "state": "IL",
+      "country": "USA",
+      "coordinates": [
+        -87.6298,
+        41.8781
+      ]
+    }
+  },
+  {
+    "id": "176266637359422157",
+    "text": "Compared to Verizon, T-Mobile coverage is just as good in Fort Worth",
+    "createdAt": "Thu, 06 Nov 2025 15:32:53 GMT",
+    "author": {
+      "userName": "melissawireless",
+      "name": "Melissa Robinson"
+    },
+    "location": {
+      "city": "Fort Worth",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -97.3308,
+        32.7555
+      ]
+    }
+  },
+  {
+    "id": "17626663735942558",
+    "text": "Compared to Verizon, T-Mobile coverage is just as good in Baltimore",
+    "createdAt": "Sat, 08 Nov 2025 15:32:53 GMT",
+    "author": {
+      "userName": "jenniferfan",
+      "name": "Jennifer Wilson"
+    },
+    "location": {
+      "city": "Baltimore",
+      "state": "MD",
+      "country": "USA",
+      "coordinates": [
+        -76.6122,
+        39.2904
+      ]
+    }
+  },
+  {
+    "id": "176266637359425199",
+    "text": "T-Mobile coverage during my road trip was solid. No issues at all",
+    "createdAt": "Sat, 08 Nov 2025 23:32:53 GMT",
+    "author": {
+      "userName": "james_taylor",
+      "name": "James Taylor"
+    },
+    "location": {
+      "city": "Dallas",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -96.797,
+        32.7767
+      ]
+    }
+  },
+  {
+    "id": "1762666373594446210",
+    "text": "T-Mobile coverage during my road trip was solid. No issues at all",
+    "createdAt": "Fri, 07 Nov 2025 21:32:53 GMT",
+    "author": {
+      "userName": "JustinHernandez966",
+      "name": "Justin Hernandez"
+    },
+    "location": {
+      "city": "Miami",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -80.1918,
+        25.7617
+      ]
+    }
+  },
+  {
+    "id": "1762666373594891111",
+    "text": "T-Mobile coverage map shows 5G but I'm only getting 4G in Chicago",
+    "createdAt": "Fri, 07 Nov 2025 10:32:53 GMT",
+    "author": {
+      "userName": "JessicaYoung494",
+      "name": "Jessica Young"
+    },
+    "location": {
+      "city": "Chicago",
+      "state": "IL",
+      "country": "USA",
+      "coordinates": [
+        -87.6298,
+        41.8781
+      ]
+    }
+  }
+]

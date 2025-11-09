@@ -1,0 +1,236 @@
+[
+  {
+    "id": "176266637359521850",
+    "text": "Just set up autopay with T-Mobile and got a $5/month discount!",
+    "createdAt": "Sat, 08 Nov 2025 04:32:53 GMT",
+    "author": {
+      "userName": "jason_clark",
+      "name": "Jason Jackson"
+    },
+    "location": {
+      "city": "Fort Worth",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -97.3308,
+        32.7555
+      ]
+    }
+  },
+  {
+    "id": "176266637359596211",
+    "text": "The T-Mobile billing app makes it easy to track my usage and payments",
+    "createdAt": "Sat, 08 Nov 2025 15:32:53 GMT",
+    "author": {
+      "userName": "mike_lee",
+      "name": "Mike Jones"
+    },
+    "location": {
+      "city": "Minneapolis",
+      "state": "MN",
+      "country": "USA",
+      "coordinates": [
+        -93.265,
+        44.9778
+      ]
+    }
+  },
+  {
+    "id": "176266637359570802",
+    "text": "T-Mobile billing error on my account. They fixed it immediately though 👍",
+    "createdAt": "Thu, 06 Nov 2025 23:32:53 GMT",
+    "author": {
+      "userName": "daviddaily",
+      "name": "David Allen"
+    },
+    "location": {
+      "city": "Pittsburgh",
+      "state": "PA",
+      "country": "USA",
+      "coordinates": [
+        -79.9959,
+        40.4406
+      ]
+    }
+  },
+  {
+    "id": "176266637359539893",
+    "text": "Got charged twice on my T-Mobile bill this month. Waiting for customer service",
+    "createdAt": "Thu, 06 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "nicole_white",
+      "name": "Nicole Thompson"
+    },
+    "location": {
+      "city": "Charlotte",
+      "state": "NC",
+      "country": "USA",
+      "coordinates": [
+        -80.8431,
+        35.2271
+      ]
+    }
+  },
+  {
+    "id": "176266637359593664",
+    "text": "Got charged twice on my T-Mobile bill this month. Waiting for customer service",
+    "createdAt": "Thu, 06 Nov 2025 11:32:53 GMT",
+    "author": {
+      "userName": "AmyLopez136",
+      "name": "Amy Lopez"
+    },
+    "location": {
+      "city": "Charlotte",
+      "state": "NC",
+      "country": "USA",
+      "coordinates": [
+        -80.8431,
+        35.2271
+      ]
+    }
+  },
+  {
+    "id": "176266637359575175",
+    "text": "T-Mobile billing is so transparent. No hidden fees! Love it 💯",
+    "createdAt": "Sat, 08 Nov 2025 10:32:53 GMT",
+    "author": {
+      "userName": "sarahofficial",
+      "name": "Sarah Miller"
+    },
+    "location": {
+      "city": "Kansas City",
+      "state": "MO",
+      "country": "USA",
+      "coordinates": [
+        -94.5786,
+        39.0997
+      ]
+    }
+  },
+  {
+    "id": "17626663735955226",
+    "text": "Got charged twice on my T-Mobile bill this month. Waiting for customer service",
+    "createdAt": "Fri, 07 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "brandonuser",
+      "name": "Brandon Martinez"
+    },
+    "location": {
+      "city": "Denver",
+      "state": "CO",
+      "country": "USA",
+      "coordinates": [
+        -104.9903,
+        39.7392
+      ]
+    }
+  },
+  {
+    "id": "176266637359523047",
+    "text": "T-Mobile billing is confusing with all these taxes and fees added",
+    "createdAt": "Sun, 09 Nov 2025 05:32:53 GMT",
+    "author": {
+      "userName": "whited10",
+      "name": "David White"
+    },
+    "location": {
+      "city": "Atlanta",
+      "state": "GA",
+      "country": "USA",
+      "coordinates": [
+        -84.388,
+        33.749
+      ]
+    }
+  },
+  {
+    "id": "176266637359576608",
+    "text": "T-Mobile billing is fair. No surprise charges like my old carrier",
+    "createdAt": "Sat, 08 Nov 2025 00:32:53 GMT",
+    "author": {
+      "userName": "emilythe",
+      "name": "Emily Davis"
+    },
+    "location": {
+      "city": "Milwaukee",
+      "state": "WI",
+      "country": "USA",
+      "coordinates": [
+        -87.9065,
+        43.0389
+      ]
+    }
+  },
+  {
+    "id": "176266637359589049",
+    "text": "T-Mobile billing support is helpful. They explained every charge on my bill",
+    "createdAt": "Fri, 07 Nov 2025 00:32:53 GMT",
+    "author": {
+      "userName": "kingm42",
+      "name": "Michelle King"
+    },
+    "location": {
+      "city": "Jacksonville",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -81.6557,
+        30.3322
+      ]
+    }
+  },
+  {
+    "id": "176266637359591010",
+    "text": "T-Mobile billing is confusing with all these taxes and fees added",
+    "createdAt": "Sat, 08 Nov 2025 07:32:53 GMT",
+    "author": {
+      "userName": "JustinClark385",
+      "name": "Justin Clark"
+    },
+    "location": {
+      "city": "Minneapolis",
+      "state": "MN",
+      "country": "USA",
+      "coordinates": [
+        -93.265,
+        44.9778
+      ]
+    }
+  },
+  {
+    "id": "1762666373595330611",
+    "text": "The T-Mobile billing app makes it easy to track my usage and payments",
+    "createdAt": "Thu, 06 Nov 2025 21:32:53 GMT",
+    "author": {
+      "userName": "tyler_allen",
+      "name": "Tyler Miller"
+    },
+    "location": {
+      "city": "Portland",
+      "state": "OR",
+      "country": "USA",
+      "coordinates": [
+        -122.6765,
+        45.5152
+      ]
+    }
+  },
+  {
+    "id": "176266637359598212",
+    "text": "The T-Mobile billing app makes it easy to track my usage and payments",
+    "createdAt": "Thu, 06 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "jessica_lopez",
+      "name": "Jessica Miller"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  }
+]

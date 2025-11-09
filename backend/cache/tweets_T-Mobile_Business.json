@@ -1,0 +1,308 @@
+[
+  {
+    "id": "176266637360247780",
+    "text": "Our company switched to T-Mobile Business. Better coverage, lower cost!",
+    "createdAt": "Sat, 08 Nov 2025 09:32:53 GMT",
+    "author": {
+      "userName": "ryan_lee",
+      "name": "Ryan Moore"
+    },
+    "location": {
+      "city": "Baltimore",
+      "state": "MD",
+      "country": "USA",
+      "coordinates": [
+        -76.6122,
+        39.2904
+      ]
+    }
+  },
+  {
+    "id": "176266637360234251",
+    "text": "The T-Mobile Business account manager is incredibly helpful",
+    "createdAt": "Thu, 06 Nov 2025 20:32:53 GMT",
+    "author": {
+      "userName": "brianreal",
+      "name": "Brian Walker"
+    },
+    "location": {
+      "city": "St. Louis",
+      "state": "MO",
+      "country": "USA",
+      "coordinates": [
+        -90.1994,
+        38.627
+      ]
+    }
+  },
+  {
+    "id": "176266637360226822",
+    "text": "T-Mobile Business plans are saving our company thousands per year 💼",
+    "createdAt": "Sat, 08 Nov 2025 18:32:53 GMT",
+    "author": {
+      "userName": "BrianClark883",
+      "name": "Brian Clark"
+    },
+    "location": {
+      "city": "Miami",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -80.1918,
+        25.7617
+      ]
+    }
+  },
+  {
+    "id": "176266637360248563",
+    "text": "T-Mobile Business has excellent enterprise features and support",
+    "createdAt": "Fri, 07 Nov 2025 14:32:53 GMT",
+    "author": {
+      "userName": "JustinYoung232",
+      "name": "Justin Young"
+    },
+    "location": {
+      "city": "Tampa",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -82.4572,
+        27.9506
+      ]
+    }
+  },
+  {
+    "id": "176266637360258554",
+    "text": "The T-Mobile Business account manager is incredibly helpful",
+    "createdAt": "Sat, 08 Nov 2025 07:32:53 GMT",
+    "author": {
+      "userName": "AndrewWalker389",
+      "name": "Andrew Walker"
+    },
+    "location": {
+      "city": "Houston",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -95.3698,
+        29.7604
+      ]
+    }
+  },
+  {
+    "id": "176266637360253415",
+    "text": "T-Mobile Business unlimited data is perfect for our field teams",
+    "createdAt": "Thu, 06 Nov 2025 07:32:53 GMT",
+    "author": {
+      "userName": "ChrisBrown599",
+      "name": "Chris Brown"
+    },
+    "location": {
+      "city": "San Diego",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -117.1611,
+        32.7157
+      ]
+    }
+  },
+  {
+    "id": "176266637360231856",
+    "text": "T-Mobile Business plans are saving our company thousands per year 💼",
+    "createdAt": "Sat, 08 Nov 2025 09:32:53 GMT",
+    "author": {
+      "userName": "hernandeza56",
+      "name": "Amanda Hernandez"
+    },
+    "location": {
+      "city": "Atlanta",
+      "state": "GA",
+      "country": "USA",
+      "coordinates": [
+        -84.388,
+        33.749
+      ]
+    }
+  },
+  {
+    "id": "176266637360292497",
+    "text": "T-Mobile Business plans include international roaming. Great for travel",
+    "createdAt": "Thu, 06 Nov 2025 09:32:53 GMT",
+    "author": {
+      "userName": "rodriguezd3",
+      "name": "Daniel Rodriguez"
+    },
+    "location": {
+      "city": "Dallas",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -96.797,
+        32.7767
+      ]
+    }
+  },
+  {
+    "id": "176266637360245848",
+    "text": "T-Mobile Business plans include international roaming. Great for travel",
+    "createdAt": "Thu, 06 Nov 2025 13:32:53 GMT",
+    "author": {
+      "userName": "jason_brown",
+      "name": "Jason King"
+    },
+    "location": {
+      "city": "Boston",
+      "state": "MA",
+      "country": "USA",
+      "coordinates": [
+        -71.0589,
+        42.3601
+      ]
+    }
+  },
+  {
+    "id": "176266637360274539",
+    "text": "T-Mobile Business plans include international roaming. Great for travel",
+    "createdAt": "Thu, 06 Nov 2025 07:32:53 GMT",
+    "author": {
+      "userName": "michelle2024",
+      "name": "Michelle King"
+    },
+    "location": {
+      "city": "Baltimore",
+      "state": "MD",
+      "country": "USA",
+      "coordinates": [
+        -76.6122,
+        39.2904
+      ]
+    }
+  },
+  {
+    "id": "1762666373602189210",
+    "text": "T-Mobile Business unlimited data is perfect for our field teams",
+    "createdAt": "Sat, 08 Nov 2025 00:32:53 GMT",
+    "author": {
+      "userName": "ryanreal",
+      "name": "Ryan Anderson"
+    },
+    "location": {
+      "city": "San Diego",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -117.1611,
+        32.7157
+      ]
+    }
+  },
+  {
+    "id": "176266637360239811",
+    "text": "T-Mobile Business gave us a custom plan that fits our needs perfectly",
+    "createdAt": "Thu, 06 Nov 2025 09:32:53 GMT",
+    "author": {
+      "userName": "williamsj44",
+      "name": "James Williams"
+    },
+    "location": {
+      "city": "Detroit",
+      "state": "MI",
+      "country": "USA",
+      "coordinates": [
+        -83.0458,
+        42.3314
+      ]
+    }
+  },
+  {
+    "id": "1762666373602709812",
+    "text": "T-Mobile Business plans are saving our company thousands per year 💼",
+    "createdAt": "Sat, 08 Nov 2025 06:32:53 GMT",
+    "author": {
+      "userName": "michael2024",
+      "name": "Michael Moore"
+    },
+    "location": {
+      "city": "Seattle",
+      "state": "WA",
+      "country": "USA",
+      "coordinates": [
+        -122.3321,
+        47.6062
+      ]
+    }
+  },
+  {
+    "id": "1762666373602354513",
+    "text": "T-Mobile Business plans include international roaming. Great for travel",
+    "createdAt": "Sat, 08 Nov 2025 07:32:53 GMT",
+    "author": {
+      "userName": "AndrewMartinez698",
+      "name": "Andrew Martinez"
+    },
+    "location": {
+      "city": "Fort Worth",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -97.3308,
+        32.7555
+      ]
+    }
+  },
+  {
+    "id": "1762666373602679714",
+    "text": "T-Mobile Business plans include international roaming. Great for travel",
+    "createdAt": "Sun, 09 Nov 2025 01:32:53 GMT",
+    "author": {
+      "userName": "RachelMiller995",
+      "name": "Rachel Miller"
+    },
+    "location": {
+      "city": "Portland",
+      "state": "OR",
+      "country": "USA",
+      "coordinates": [
+        -122.6765,
+        45.5152
+      ]
+    }
+  },
+  {
+    "id": "1762666373602111415",
+    "text": "The T-Mobile Business portal makes managing 50+ lines easy",
+    "createdAt": "Fri, 07 Nov 2025 16:32:53 GMT",
+    "author": {
+      "userName": "taylora67",
+      "name": "Andrew Taylor"
+    },
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -118.2437,
+        34.0522
+      ]
+    }
+  },
+  {
+    "id": "1762666373602737816",
+    "text": "The T-Mobile Business account manager is incredibly helpful",
+    "createdAt": "Fri, 07 Nov 2025 12:32:53 GMT",
+    "author": {
+      "userName": "JamesThomas510",
+      "name": "James Thomas"
+    },
+    "location": {
+      "city": "Tampa",
+      "state": "FL",
+      "country": "USA",
+      "coordinates": [
+        -82.4572,
+        27.9506
+      ]
+    }
+  }
+]

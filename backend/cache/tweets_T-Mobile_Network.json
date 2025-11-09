@@ -1,0 +1,236 @@
+[
+  {
+    "id": "17626663735801880",
+    "text": "T-Mobile coverage in rural areas needs improvement. Barely getting signal outside the city",
+    "createdAt": "Fri, 07 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "AmandaRodriguez484",
+      "name": "Amanda Rodriguez"
+    },
+    "location": {
+      "city": "San Antonio",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -98.4936,
+        29.4241
+      ]
+    }
+  },
+  {
+    "id": "176266637358019861",
+    "text": "Just drove cross-country and T-Mobile network coverage was solid the whole way!",
+    "createdAt": "Fri, 07 Nov 2025 11:32:53 GMT",
+    "author": {
+      "userName": "JustinTaylor878",
+      "name": "Justin Taylor"
+    },
+    "location": {
+      "city": "Houston",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -95.3698,
+        29.7604
+      ]
+    }
+  },
+  {
+    "id": "176266637358062302",
+    "text": "Network keeps dropping in Sacramento. What's going on @TMobile?",
+    "createdAt": "Sat, 08 Nov 2025 18:32:53 GMT",
+    "author": {
+      "userName": "smitht21",
+      "name": "Tyler Smith"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  },
+  {
+    "id": "176266637358091873",
+    "text": "T-Mobile network speed is great but coverage has dead zones in my building 😕",
+    "createdAt": "Sat, 08 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "KevinLewis541",
+      "name": "Kevin Lewis"
+    },
+    "location": {
+      "city": "Sacramento",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -121.4944,
+        38.5816
+      ]
+    }
+  },
+  {
+    "id": "176266637358067904",
+    "text": "T-Mobile network has been rock solid in Baltimore lately. No complaints! 📶",
+    "createdAt": "Fri, 07 Nov 2025 00:32:53 GMT",
+    "author": {
+      "userName": "amylife",
+      "name": "Amy Wilson"
+    },
+    "location": {
+      "city": "Baltimore",
+      "state": "MD",
+      "country": "USA",
+      "coordinates": [
+        -76.6122,
+        39.2904
+      ]
+    }
+  },
+  {
+    "id": "17626663735809665",
+    "text": "The network quality on T-Mobile is consistently good. Rarely have issues anymore",
+    "createdAt": "Fri, 07 Nov 2025 12:32:53 GMT",
+    "author": {
+      "userName": "thompsonr7",
+      "name": "Ryan Thompson"
+    },
+    "location": {
+      "city": "Chicago",
+      "state": "IL",
+      "country": "USA",
+      "coordinates": [
+        -87.6298,
+        41.8781
+      ]
+    }
+  },
+  {
+    "id": "176266637358013116",
+    "text": "T-Mobile network has been rock solid in Columbus lately. No complaints! 📶",
+    "createdAt": "Sat, 08 Nov 2025 10:32:53 GMT",
+    "author": {
+      "userName": "AndrewHarris549",
+      "name": "Andrew Harris"
+    },
+    "location": {
+      "city": "Columbus",
+      "state": "OH",
+      "country": "USA",
+      "coordinates": [
+        -82.9988,
+        39.9612
+      ]
+    }
+  },
+  {
+    "id": "176266637358039137",
+    "text": "The network quality on T-Mobile is consistently good. Rarely have issues anymore",
+    "createdAt": "Fri, 07 Nov 2025 13:32:53 GMT",
+    "author": {
+      "userName": "AndrewMoore506",
+      "name": "Andrew Moore"
+    },
+    "location": {
+      "city": "Austin",
+      "state": "TX",
+      "country": "USA",
+      "coordinates": [
+        -97.7431,
+        30.2672
+      ]
+    }
+  },
+  {
+    "id": "176266637358053198",
+    "text": "Network keeps dropping in Detroit. What's going on @TMobile?",
+    "createdAt": "Sat, 08 Nov 2025 21:32:53 GMT",
+    "author": {
+      "userName": "amandaofficial",
+      "name": "Amanda Jones"
+    },
+    "location": {
+      "city": "Detroit",
+      "state": "MI",
+      "country": "USA",
+      "coordinates": [
+        -83.0458,
+        42.3314
+      ]
+    }
+  },
+  {
+    "id": "176266637358030989",
+    "text": "Impressed with T-Mobile's network reliability. Haven't had a dropped call in months",
+    "createdAt": "Thu, 06 Nov 2025 21:32:53 GMT",
+    "author": {
+      "userName": "jenniferfan",
+      "name": "Jennifer Smith"
+    },
+    "location": {
+      "city": "Nashville",
+      "state": "TN",
+      "country": "USA",
+      "coordinates": [
+        -86.7816,
+        36.1627
+      ]
+    }
+  },
+  {
+    "id": "1762666373580784310",
+    "text": "Just drove cross-country and T-Mobile network coverage was solid the whole way!",
+    "createdAt": "Thu, 06 Nov 2025 20:32:53 GMT",
+    "author": {
+      "userName": "melissapro",
+      "name": "Melissa Allen"
+    },
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "USA",
+      "coordinates": [
+        -122.4194,
+        37.7749
+      ]
+    }
+  },
+  {
+    "id": "1762666373580634911",
+    "text": "Network congestion is real in Atlanta. Speeds drop significantly during peak hours",
+    "createdAt": "Sat, 08 Nov 2025 22:32:53 GMT",
+    "author": {
+      "userName": "jessica_harris",
+      "name": "Jessica Jones"
+    },
+    "location": {
+      "city": "Atlanta",
+      "state": "GA",
+      "country": "USA",
+      "coordinates": [
+        -84.388,
+        33.749
+      ]
+    }
+  },
+  {
+    "id": "1762666373580248412",
+    "text": "Network keeps dropping in Indianapolis. What's going on @TMobile?",
+    "createdAt": "Fri, 07 Nov 2025 15:32:53 GMT",
+    "author": {
+      "userName": "wilsonm25",
+      "name": "Michelle Wilson"
+    },
+    "location": {
+      "city": "Indianapolis",
+      "state": "IN",
+      "country": "USA",
+      "coordinates": [
+        -86.1581,
+        39.7684
+      ]
+    }
+  }
+]
