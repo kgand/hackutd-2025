@@ -32,50 +32,6 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
   const [error, setError] = useState<string | null>(null);
   const [lastAnalyzedContext, setLastAnalyzedContext] = useState<string>('');
   const [selectedSegment, setSelectedSegment] = useState<'positive' | 'negative' | null>(null);
-  const audioRef = React.useRef<HTMLAudioElement | null>(null);
-
-  // Play random topic audio when topic changes
-  React.useEffect(() => {
-    if (topic && topic !== 'Customer Feedback') {
-      playTopicAudio(topic);
-    }
-  }, [topic]);
-
-  const playTopicAudio = async (topicName: string) => {
-    try {
-      // Stop any currently playing audio
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
-      const response = await fetch(`${API_BASE_URL}/api/audio/${encodeURIComponent(topicName)}`);
-      
-      if (response.ok) {
-        const audioBlob = await response.blob();
-        const audioUrl = URL.createObjectURL(audioBlob);
-        
-        const audio = new Audio(audioUrl);
-        audioRef.current = audio;
-        
-        audio.onended = () => {
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        audio.onerror = () => {
-          URL.revokeObjectURL(audioUrl);
-        };
-        
-        await audio.play();
-        console.log(`Playing audio for topic: ${topicName}`);
-      } else {
-        console.log(`No audio available for topic: ${topicName}`);
-      }
-    } catch (err) {
-      console.log(`Could not play audio for topic: ${topicName}`, err);
-    }
-  };
 
   const analyzeContext = async (context: string, tweets: string[], location?: string) => {
     setIsLoading(true);
@@ -184,16 +140,6 @@ export function InsightsPanel({ topic, currentData, hoveredTweets, className }: 
       }
     }
   }, [hoveredTweets, topic]);
-
-  // Cleanup audio on unmount
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <div className={cn(

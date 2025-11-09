@@ -267,6 +267,10 @@ const GraphView: React.FC<GraphViewProps> = ({ initialTopic }) => {
                         };
                         setFocusedNode(node);
                         setSelectedClusterId(cluster.cluster_id);
+                        // Play audio for the selected topic
+                        if (cluster.cluster_title) {
+                          playTopicAudio(cluster.cluster_title);
+                        }
                       }}
                     >
                       <span
