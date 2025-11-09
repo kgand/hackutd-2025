@@ -12,6 +12,33 @@ DOWNDETECTOR_URL = "https://downdetector.com/status/t-mobile"
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 
+def load_cached_data() -> Optional[Dict]:
+    """Load cached DownDetector data"""
+    if not CACHE_FILE.exists():
+        print("[DownDetector] No cache file found")
+        return None
+    
+    try:
+        with open(CACHE_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        print(f"[DownDetector] Loaded cached data from {CACHE_FILE}")
+        return data
+    except Exception as e:
+        print(f"[DownDetector] Error loading cache: {e}")
+        return None
+
+
+def save_to_cache(data: Dict) -> None:
+    """Save DownDetector data to cache"""
+    try:
+        CACHE_DIR.mkdir(exist_ok=True)
+        with open(CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+        print(f"[DownDetector] Saved data to {CACHE_FILE}")
+    except Exception as e:
+        print(f"[DownDetector] Error saving cache: {e}")
+
+
 def scrape_downdetector() -> Optional[Dict]:
     """Scrape T-Mobile status from DownDetector"""
     print(f"[DownDetector] Scraping {DOWNDETECTOR_URL}")
@@ -99,6 +126,24 @@ def scrape_downdetector() -> Optional[Dict]:
     except Exception as e:
         print(f"[DownDetector] Scraping error: {e}")
         return None
+
+
+def get_downdetector_data(force_refresh: bool = False) -> Optional[Dict]:
+    """Get DownDetector data with caching"""
+    # Check cache first
+    if not force_refresh:
+        cached_data = load_cached_data()
+        if cached_data:
+            return cached_data
+    
+    # Scrape fresh data
+    print("[DownDetector] Cache miss, scraping fresh data...")
+    data = scrape_downdetector()
+    
+    if data:
+        save_to_cache(data)
+    
+    return data
 
 
 if __name__ == "__main__":
